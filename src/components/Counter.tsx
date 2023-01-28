@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+import Button from "@mui/joy/Button";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
+  const increment = () => setCount((count: number) => count + 1);
 
   return (
     <div className="card">
       <h1>{count}</h1>
-      <Button
-        variant="contained"
-        onClick={() => setCount((count: number) => count + 1)}
-      >
+      <Button color="primary" variant="soft" onClick={increment}>
         Like
       </Button>
       <Button
-        variant="contained"
+        color="primary"
+        variant="soft"
         onClick={() => setCount((count: number) => count - 1)}
       >
         Dislike
