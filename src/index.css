@@ -39,8 +39,8 @@ body {
   margin-top: 50px;
   text-align: center;
 }
-.form > .form_input,
-.form > .form_button {
+.form .form_input,
+.form .form_button {
   margin-top: 10px;
 }
 

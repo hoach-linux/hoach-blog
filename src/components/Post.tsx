@@ -1,27 +1,19 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
+import Card from "@mui/joy/Card";
+import Typography from "@mui/joy/Typography";
 import "../assets/style/post.css";
 
 const Post = (props: any) => {
   return (
-    <Card sx={{ maxWidth: 945 }} className="post">
-      <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.post.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.post.id}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.post.body}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <div>
+      <Card variant="outlined" sx={{ maxWidth: 945 }} className="post">
+        <Typography gutterBottom level="h5" component="div">
+          {props.post.title}
+        </Typography>
+        <Typography level="body2">{props.post.id}</Typography>
+        <Typography level="body2">{props.post.body}</Typography>
+      </Card>
+    </div>
   );
 };
 
