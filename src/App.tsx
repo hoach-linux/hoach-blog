@@ -1,9 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import "./assets/style/posts.css";
 import Counter from "./components/Counter";
-import Post from "./components/Post";
-import Typography from "@mui/material/Typography";
+import PostList from "./components/PostList";
+import Form from "./components/Form";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -35,14 +34,8 @@ function App() {
   ]);
   return (
     <div className="App">
-      <Typography variant="h2" component="h2" className="paragraph">
-        Posts
-      </Typography>
-      {posts.map((post) => (
-        <div className="posts">
-          <Post post={post} key={post.id} />
-        </div>
-      ))}
+      <Form />
+      <PostList posts={posts} title="Posts" />
     </div>
   );
 }
