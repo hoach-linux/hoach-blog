@@ -1,20 +1,19 @@
 import * as React from "react";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
-import "../assets/style/form.css";
 
 const Form = () => {
   return (
-    <div>
+    <div className="form">
       <TextField
-        className="form-input"
+        className="form_input"
         fullWidth
         id="outlined-basic"
         label="Title"
         variant="outlined"
       />
       <TextField
-        className="form-input"
+        className="form_input"
         fullWidth
         id="outlined-basic"
         label="Description"
@@ -22,7 +21,7 @@ const Form = () => {
       />
       <Button
         size="large"
-        className="form-button"
+        className="form_button"
         fullWidth
         color="primary"
         variant="contained"
