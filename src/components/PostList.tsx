@@ -8,9 +8,9 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
       <Typography variant="h2" component="h2" className="paragraph">
         {title}
       </Typography>
-      {posts.map((post: any) => (
+      {posts.map((post: any, index) => (
         <div className="posts">
-          <Post post={post} key={post.id} />
+          <Post number={index + 1} post={post} key={post.id} />
         </div>
       ))}
     </div>

@@ -32,9 +32,14 @@ function App() {
       body: "Ruby — динамический, рефлективный, интерпретируемый высокоуровневый язык программирования. Язык обладает независимой от операционной системы реализацией многопоточности, сильной динамической типизацией, сборщиком мусора и многими другими возможностями. Википедия",
     },
   ]);
+
+  const createPost = (newPost: any) => {
+    setPosts([...posts, newPost]);
+  };
+
   return (
     <div className="App">
-      <Form />
+      <Form create={createPost} />
       <PostList posts={posts} title="Posts" />
     </div>
   );
