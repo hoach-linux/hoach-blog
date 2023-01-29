@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
   return (
     <div className="post_list">
-      <Typography variant="h2" component="h2" className="paragraph">
+      <Typography variant="h3" component="h3" className="paragraph">
         {title}
       </Typography>
       {posts.map((post: any, index) => (

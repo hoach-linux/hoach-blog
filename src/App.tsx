@@ -41,11 +41,8 @@ function App() {
 
   return (
     <div className="App">
-      <Form create={createPost} />
-      <PostList
-        posts={posts}
-        title="Posts"
-      />
+      <Form create={createPost} title="Create Post" />
+      <PostList posts={posts} title="Posts" />
     </div>
   );
 }

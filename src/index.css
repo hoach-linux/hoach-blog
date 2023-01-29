@@ -40,6 +40,9 @@ body {
 .form .form_button {
   margin-top: 10px;
 }
+.paragraph {
+  text-align: center;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
