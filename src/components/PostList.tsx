@@ -2,7 +2,11 @@ import * as React from "react";
 import Post from "./Post";
 import Typography from "@mui/material/Typography";
 
-const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
+const PostList = ({ posts, title, remove }: { posts: object[]; title: string, remove: any }) => {
+  const removePost = (postId: number) => {
+    remove(postId)
+  }
+
   return (
     <div className="post_list">
       <Typography variant="h3" component="h3" className="paragraph">
@@ -10,7 +14,12 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
       </Typography>
       {posts.map((post: any, index) => (
         <div className="posts">
-          <Post number={index + 1} post={post} key={post.id} />
+          <Post
+            number={index + 1}
+            post={post}
+            key={post.id}
+            remove={removePost}
+          />
         </div>
       ))}
     </div>

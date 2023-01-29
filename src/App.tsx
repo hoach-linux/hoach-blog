@@ -38,11 +38,16 @@ function App() {
 
     setPosts(newPosts);
   };
+  const removePost = (postId: number) => {
+    const newPostList = posts.filter(post => post.id !== postId)
+
+    setPosts(newPostList)
+  }
 
   return (
     <div className="App">
       <Form create={createPost} title="Create Post" />
-      <PostList posts={posts} title="Posts" />
+      <PostList posts={posts} title="Posts" remove={removePost} />
     </div>
   );
 }

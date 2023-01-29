@@ -43,6 +43,9 @@ body {
 .paragraph {
   text-align: center;
 }
+.post .remove_button {
+  margin-top: 7px;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
