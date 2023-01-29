@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 
-const Form = ({ create }) => {
+const Form = ({ create }: { create: any }) => {
   const [post, setPost] = useState({ title: "", body: "" });
   const [isLoading, setIsloading] = useState(false);
 

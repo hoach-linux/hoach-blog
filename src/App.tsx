@@ -34,13 +34,18 @@ function App() {
   ]);
 
   const createPost = (newPost: any) => {
-    setPosts([...posts, newPost]);
+    const newPosts = [...posts, newPost];
+
+    setPosts(newPosts);
   };
 
   return (
     <div className="App">
       <Form create={createPost} />
-      <PostList posts={posts} title="Posts" />
+      <PostList
+        posts={posts}
+        title="Posts"
+      />
     </div>
   );
 }
