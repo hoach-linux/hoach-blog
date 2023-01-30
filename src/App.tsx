@@ -8,6 +8,11 @@ import Typography from "@mui/material/Typography";
 import PostSelect from "./components/PostSelect";
 
 function App() {
+  interface IPostForCompare {
+    title: string;
+    body: string;
+  }
+
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -51,9 +56,16 @@ function App() {
 
     setPosts(newPostList);
   };
-  const sortPosts = (sort: any) => {
+  const sortPosts = (sort: string) => {
     setSelectedSort(sort);
-    console.log(sort);
+
+    setPosts(
+      [...posts].sort((a, b) =>
+        a[sort as keyof IPostForCompare].localeCompare(
+          b[sort as keyof IPostForCompare]
+        )
+      )
+    );
   };
 
   return (
@@ -64,7 +76,12 @@ function App() {
         component="div"
         role="presentation"
       />
-      <PostSelect options={options} value={selectedSort} defaultValue="Sort" onChange={sortPosts} />
+      <PostSelect
+        options={options}
+        value={selectedSort}
+        defaultValue="Sort"
+        change={sortPosts}
+      />
       {posts.length ? (
         <PostList posts={posts} title="Posts" remove={removePost} />
       ) : (
