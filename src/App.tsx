@@ -6,6 +6,7 @@ import PostList from "./components/PostList";
 import Form from "./components/Form";
 import Typography from "@mui/material/Typography";
 import PostSelect from "./components/PostSelect";
+import Navbar from "./components/Navbar";
 
 function App() {
   interface ISelectedSort {
@@ -70,6 +71,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <Form create={createPost} title="Create Post" />
       <Divider
         style={{ marginBottom: "10px" }}
