@@ -2,6 +2,11 @@ import * as React from "react";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 
+interface IOption {
+  value?: string;
+  name?: string;
+}
+
 const PostSelect = ({
   options,
   value,
@@ -19,10 +24,9 @@ const PostSelect = ({
       placeholder={defaultValue}
       variant="soft"
       size="lg"
-      value={value}
       onChange={(e) => onChange((e?.target as HTMLInputElement).value)}
     >
-      {options.map((option) => (
+      {options.map((option: IOption) => (
         <Option value={option.value} key={option.value}>
           {option.name}
         </Option>
