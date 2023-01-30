@@ -72,9 +72,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar create={createPost} />
       <Toolbar />
-      <Form create={createPost} title="Create Post" />
       <Divider
         style={{ marginBottom: "10px" }}
         component="div"

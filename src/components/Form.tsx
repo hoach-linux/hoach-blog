@@ -1,11 +1,10 @@
 import * as React from "react";
 import { useState } from "react";
 import { TextField } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 
-const Form = ({ create, title }: { create: any, title: string }) => {
+const Form = ({ create, close }: { create: any; close: any }) => {
   const [post, setPost] = useState({ title: "", body: "" });
   const [isLoading, setIsloading] = useState(false);
 
@@ -21,6 +20,8 @@ const Form = ({ create, title }: { create: any, title: string }) => {
         create(newPost);
 
         setIsloading(false);
+        
+        close(false);
       }, 1000);
 
       setPost({ title: "", body: "" });
@@ -29,40 +30,35 @@ const Form = ({ create, title }: { create: any, title: string }) => {
 
   return (
     <div className="form">
-      <Card variant="outlined" sx={{ maxWidth: 945 }} className="post">
-        <Typography variant="h3" component="h3" className="paragraph">
-          {title}
-        </Typography>
-        <TextField
-          value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
-          className="form_input"
-          fullWidth
-          id="outlined-basic"
-          label="Title"
-          variant="outlined"
-          inputProps={{ minLength: 1 }}
-        />
-        <TextField
-          value={post.body}
-          onChange={(e) => setPost({ ...post, body: e.target.value })}
-          className="form_input"
-          fullWidth
-          id="outlined-basic"
-          label="Description"
-          variant="outlined"
-          inputProps={{ minLength: 1 }}
-        />
-        <Button
-          loading={isLoading}
-          size="lg"
-          className="form_button"
-          fullWidth
-          onClick={addNewPost}
-        >
-          Create
-        </Button>
-      </Card>
+      <TextField
+        value={post.title}
+        onChange={(e) => setPost({ ...post, title: e.target.value })}
+        className="form_input"
+        fullWidth
+        id="outlined-basic"
+        label="Title"
+        variant="outlined"
+        inputProps={{ minLength: 1 }}
+      />
+      <TextField
+        value={post.body}
+        onChange={(e) => setPost({ ...post, body: e.target.value })}
+        className="form_input"
+        fullWidth
+        id="outlined-basic"
+        label="Description"
+        variant="outlined"
+        inputProps={{ minLength: 1 }}
+      />
+      <Button
+        loading={isLoading}
+        size="lg"
+        className="form_button"
+        fullWidth
+        onClick={addNewPost}
+      >
+        Create
+      </Button>
     </div>
   );
 };
