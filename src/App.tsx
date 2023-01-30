@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import PostSelect from "./components/PostSelect";
 
 function App() {
-  interface IPostForCompare {
+  interface ISelectedSort {
     title: string;
     body: string;
   }
@@ -61,8 +61,8 @@ function App() {
 
     setPosts(
       [...posts].sort((a, b) =>
-        a[sort as keyof IPostForCompare].localeCompare(
-          b[sort as keyof IPostForCompare]
+        a[sort as keyof ISelectedSort].localeCompare(
+          b[sort as keyof ISelectedSort]
         )
       )
     );
