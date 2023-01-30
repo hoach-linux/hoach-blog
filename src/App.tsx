@@ -1,8 +1,11 @@
 import { useState } from "react";
 import "./App.css";
+import Divider from "@mui/joy/Divider";
 import Counter from "./components/Counter";
 import PostList from "./components/PostList";
 import Form from "./components/Form";
+import Typography from "@mui/material/Typography";
+import PostSelect from "./components/PostSelect";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -32,6 +35,11 @@ function App() {
       body: "Ruby — динамический, рефлективный, интерпретируемый высокоуровневый язык программирования. Язык обладает независимой от операционной системы реализацией многопоточности, сильной динамической типизацией, сборщиком мусора и многими другими возможностями. Википедия",
     },
   ]);
+  const [selectedSort, setSelectedSort] = useState("");
+  const options = [
+    { value: "title", name: "Title" },
+    { value: "body", name: "Description" },
+  ];
 
   const createPost = (newPost: any) => {
     const newPosts = [...posts, newPost];
@@ -39,15 +47,36 @@ function App() {
     setPosts(newPosts);
   };
   const removePost = (postId: number) => {
-    const newPostList = posts.filter(post => post.id !== postId)
+    const newPostList = posts.filter((post) => post.id !== postId);
 
-    setPosts(newPostList)
-  }
+    setPosts(newPostList);
+  };
+  const sortPosts = (sort: any) => {
+    setSelectedSort(sort);
+    console.log(sort);
+  };
 
   return (
     <div className="App">
       <Form create={createPost} title="Create Post" />
-      <PostList posts={posts} title="Posts" remove={removePost} />
+      <Divider
+        style={{ marginBottom: "10px" }}
+        component="div"
+        role="presentation"
+      />
+      <PostSelect options={options} value={selectedSort} defaultValue="Sort" onChange={sortPosts} />
+      {posts.length ? (
+        <PostList posts={posts} title="Posts" remove={removePost} />
+      ) : (
+        <Typography
+          variant="h3"
+          component="h3"
+          style={{ marginTop: "50px" }}
+          className="paragraph"
+        >
+          Postlist is empty
+        </Typography>
+      )}
     </div>
   );
 }

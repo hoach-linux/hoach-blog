@@ -11,25 +11,14 @@ const PostList = ({
   title: string;
   remove: any;
 }) => {
-  const removePost = (postId: number) => {
-    remove(postId);
-  };
-
   return (
     <div className="post_list">
-      {posts.length !== 0 && (
-        <Typography variant="h3" component="h3" className="paragraph">
-          {title}
-        </Typography>
-      )}
+      <Typography variant="h3" component="h3" className="paragraph">
+        {title}
+      </Typography>
       {posts.map((post: any, index) => (
-        <div className="posts">
-          <Post
-            number={index + 1}
-            post={post}
-            key={post.id}
-            remove={removePost}
-          />
+        <div className="posts" key={post.id}>
+          <Post number={index + 1} post={post} remove={remove} />
         </div>
       ))}
     </div>

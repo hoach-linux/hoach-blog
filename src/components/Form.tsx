@@ -35,7 +35,6 @@ const Form = ({ create, title }: { create: any, title: string }) => {
         </Typography>
         <TextField
           value={post.title}
-          required
           onChange={(e) => setPost({ ...post, title: e.target.value })}
           className="form_input"
           fullWidth
@@ -46,7 +45,6 @@ const Form = ({ create, title }: { create: any, title: string }) => {
         />
         <TextField
           value={post.body}
-          required
           onChange={(e) => setPost({ ...post, body: e.target.value })}
           className="form_input"
           fullWidth
