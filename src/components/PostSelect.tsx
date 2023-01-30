@@ -20,7 +20,7 @@ const PostSelect = ({
       variant="soft"
       size="lg"
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange((e?.target as HTMLInputElement).value)}
     >
       {options.map((option) => (
         <Option value={option.value} key={option.value}>
