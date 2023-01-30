@@ -16,11 +16,13 @@ const PostList = ({
       <Typography variant="h3" component="h3" className="paragraph">
         {title}
       </Typography>
-      {posts.map((post: any, index) => (
-        <div className="posts" key={post.id}>
-          <Post number={index + 1} post={post} remove={remove} />
-        </div>
-      ))}
+      {posts
+        .map((post: any, index) => (
+          <div className="posts" key={post.id}>
+            <Post number={index + 1} post={post} remove={remove} />
+          </div>
+        ))
+        .reverse()}
     </div>
   );
 };

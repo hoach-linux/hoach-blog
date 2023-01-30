@@ -14,12 +14,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import TypographyJoy from "@mui/joy/Typography";
 import Button from "@mui/material/Button";
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
-import Input from "@mui/joy/Input";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
-import Stack from "@mui/joy/Stack";
 import ButtonJoy from "@mui/joy/Button";
 import Add from "@mui/icons-material/Add";
 import Form from "./Form";
@@ -55,6 +51,7 @@ const Navbar = (props: Props, create: any) => {
           variant="plain"
           color="primary"
           fullWidth
+          size="lg"
           startDecorator={<Add />}
           onClick={() => setOpen(true)}
         >

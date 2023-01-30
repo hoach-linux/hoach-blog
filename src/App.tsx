@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import PostSelect from "./components/PostSelect";
 import Navbar from "./components/Navbar";
 import Toolbar from "@mui/material/Toolbar";
+import { TextField } from "@mui/material";
 
 function App() {
   interface ISelectedSort {
@@ -74,8 +75,16 @@ function App() {
     <div className="App">
       <Navbar create={createPost} />
       <Toolbar />
+      <TextField
+        className="input"
+        fullWidth
+        id="outlined-basic"
+        label="Search"
+        variant="outlined"
+        inputProps={{ minLength: 1 }}
+      />
       <Divider
-        style={{ marginBottom: "10px" }}
+        style={{ marginBottom: "10px", marginTop: "10px" }}
         component="div"
         role="presentation"
       />
