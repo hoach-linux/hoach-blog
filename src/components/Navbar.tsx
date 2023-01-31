@@ -12,13 +12,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import TypographyJoy from "@mui/joy/Typography";
 import Button from "@mui/material/Button";
 import Modal from "@mui/joy/Modal";
-import ModalDialog from "@mui/joy/ModalDialog";
 import ButtonJoy from "@mui/joy/Button";
 import Add from "@mui/icons-material/Add";
-import Form from "./Form";
+import PostModalDialog from "./PostModalDialog";
 
 interface Props {
   create: any;
@@ -132,36 +130,12 @@ const Navbar = (props: Props, create: any) => {
         </Box>
       </Box>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <ModalDialog
-          aria-labelledby="basic-modal-dialog-title"
-          aria-describedby="basic-modal-dialog-description"
-          sx={{
-            maxWidth: 700,
-            borderRadius: "md",
-            minWidth: 360,
-            p: 3,
-            boxShadow: "lg",
-          }}
-        >
-          <TypographyJoy
-            id="basic-modal-dialog-title"
-            component="h2"
-            level="inherit"
-            fontSize="1.25em"
-            mb="0.25em"
-          >
-            Create new post
-          </TypographyJoy>
-          <TypographyJoy
-            id="basic-modal-dialog-description"
-            mt={0.5}
-            mb={2}
-            textColor="text.tertiary"
-          >
-            Fill in the information of the post.
-          </TypographyJoy>
-          <Form create={props.create} close={closeModal} />
-        </ModalDialog>
+        <PostModalDialog
+          create={props.create}
+          close={closeModal}
+          title="Create new post"
+          offer="Fill in the information of the post."
+        />
       </Modal>
     </React.Fragment>
   );
