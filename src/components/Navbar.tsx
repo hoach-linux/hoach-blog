@@ -25,8 +25,9 @@ interface Props {
   window?: () => Window;
 }
 
-const drawerWidth = 240;
+const drawerWidth = "fullWidth";
 const navItems = ["Home", "About", "Contact"];
+const anchor = "bottom";
 
 const Navbar = (props: Props, create: any) => {
   const { window } = props;
@@ -41,22 +42,19 @@ const Navbar = (props: Props, create: any) => {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+      }}
+    >
       <Typography variant="h6" sx={{ my: 2 }}>
         MUI
       </Typography>
       <Divider />
       <List>
-        <ButtonJoy
-          variant="plain"
-          color="primary"
-          fullWidth
-          size="lg"
-          startDecorator={<Add />}
-          onClick={() => setOpen(true)}
-        >
-          New post
-        </ButtonJoy>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
@@ -93,16 +91,16 @@ const Navbar = (props: Props, create: any) => {
             >
               MUI
             </Typography>
+            <ButtonJoy
+              variant="soft"
+              color="primary"
+              startDecorator={<Add />}
+              onClick={() => setOpen(true)}
+              style={{ marginRight: "10px" }}
+            >
+              New post
+            </ButtonJoy>
             <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-              <ButtonJoy
-                variant="soft"
-                color="primary"
-                startDecorator={<Add />}
-                onClick={() => setOpen(true)}
-                style={{ marginRight: "10px" }}
-              >
-                New post
-              </ButtonJoy>
               {navItems.map((item) => (
                 <Button key={item} sx={{ color: "#fff" }}>
                   {item}
@@ -113,6 +111,7 @@ const Navbar = (props: Props, create: any) => {
         </AppBar>
         <Box component="nav">
           <Drawer
+            anchor={anchor}
             container={container}
             variant="temporary"
             open={mobileOpen}
