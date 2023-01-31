@@ -1,14 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import Divider from "@mui/joy/Divider";
-import Counter from "./components/Counter";
 import PostList from "./components/PostList";
-import Form from "./components/Form";
 import Typography from "@mui/material/Typography";
 import PostSelect from "./components/PostSelect";
 import Navbar from "./components/Navbar";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField } from "@mui/material";
+import LabelBottomNavigation from "./components/LabelBottomNavigation";
 
 function App() {
   interface ISelectedSort {
@@ -106,6 +105,7 @@ function App() {
           Postlist is empty
         </Typography>
       )}
+      <LabelBottomNavigation />
     </div>
   );
 }

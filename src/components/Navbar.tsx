@@ -39,30 +39,30 @@ const Navbar = (props: Props, create: any) => {
     setOpen(isCloseModal);
   };
 
-  const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{
-        textAlign: "center",
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-      }}
-    >
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  // const drawer = (
+  //   <Box
+  //     onClick={handleDrawerToggle}
+  //     sx={{
+  //       textAlign: "center",
+  //       borderTopLeftRadius: 8,
+  //       borderTopRightRadius: 8,
+  //     }}
+  //   >
+  //     <Typography variant="h6" sx={{ my: 2 }}>
+  //       MUI
+  //     </Typography>
+  //     <Divider />
+  //     <List>
+  //       {navItems.map((item) => (
+  //         <ListItem key={item} disablePadding>
+  //           <ListItemButton sx={{ textAlign: "center" }}>
+  //             <ListItemText primary={item} />
+  //           </ListItemButton>
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //   </Box>
+  // );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -73,7 +73,7 @@ const Navbar = (props: Props, create: any) => {
         <CssBaseline />
         <AppBar component="nav">
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
@@ -81,11 +81,11 @@ const Navbar = (props: Props, create: any) => {
               sx={{ mr: 2, display: { sm: "none" } }}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{ flexGrow: 1, display: "block" }}
             >
               MUI
             </Typography>
@@ -94,7 +94,7 @@ const Navbar = (props: Props, create: any) => {
               color="primary"
               startDecorator={<Add />}
               onClick={() => setOpen(true)}
-              style={{ marginRight: "10px" }}
+              sx={{ mr: { sm: 2 } }}
             >
               New post
             </ButtonJoy>
@@ -107,7 +107,7 @@ const Navbar = (props: Props, create: any) => {
             </Box>
           </Toolbar>
         </AppBar>
-        <Box component="nav">
+        {/* <Box component="nav">
           <Drawer
             anchor={anchor}
             container={container}
@@ -127,7 +127,7 @@ const Navbar = (props: Props, create: any) => {
           >
             {drawer}
           </Drawer>
-        </Box>
+        </Box> */}
       </Box>
       <Modal open={open} onClose={() => setOpen(false)}>
         <PostModalDialog
