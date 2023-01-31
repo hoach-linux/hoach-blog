@@ -105,6 +105,7 @@ function App() {
           Postlist is empty
         </Typography>
       )}
+      <Toolbar />
       <LabelBottomNavigation />
     </div>
   );
