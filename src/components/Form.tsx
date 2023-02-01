@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 
-const Form = ({ create, close }: { create: any; close: any }) => {
+const Form = ({ close }: { close: any }) => {
   const [post, setPost] = useState({ title: "", body: "" });
   const [isLoading, setIsloading] = useState(false);
 
@@ -17,10 +17,9 @@ const Form = ({ create, close }: { create: any; close: any }) => {
       setIsloading(true);
 
       setTimeout(() => {
-        create(newPost);
 
         setIsloading(false);
-        
+
         close(false);
       }, 1000);
 

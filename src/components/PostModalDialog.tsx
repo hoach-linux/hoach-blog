@@ -4,12 +4,10 @@ import ModalDialogJoy from "@mui/joy/ModalDialog";
 import Form from "./Form";
 
 const PostModalDialog = ({
-  create,
   close,
   title,
   offer,
 }: {
-  create: any;
   close: any;
   title: string;
   offer: string;
@@ -43,7 +41,7 @@ const PostModalDialog = ({
       >
         {offer}
       </TypographyJoy>
-      <Form create={create} close={close} />
+      <Form close={close} />
     </ModalDialogJoy>
   );
 };

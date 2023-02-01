@@ -18,7 +18,7 @@ interface Props {
 
 const navItems = ["Favorites", "About"];
 
-const Navbar = (props: Props, create: any) => {
+const Navbar = (props: Props) => {
   const { window } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -75,7 +75,6 @@ const Navbar = (props: Props, create: any) => {
       </Box>
       <Modal open={open} onClose={() => setOpen(false)}>
         <PostModalDialog
-          create={props.create}
           close={closeModal}
           title="Create new post"
           offer="Fill in the information of the post."
