@@ -44,11 +44,6 @@ function Home() {
     { value: "body", name: "Description" },
   ];
 
-  const createPost = (newPost: any) => {
-    const newPosts = [...posts, newPost];
-
-    setPosts(newPosts);
-  };
   const removePost = (postId: number) => {
     const newPostList = posts.filter((post) => post.id !== postId);
 

@@ -46,6 +46,9 @@ body {
 .post .remove_button {
   margin-top: 7px;
 }
+a:hover {
+  color: inherit !important;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
