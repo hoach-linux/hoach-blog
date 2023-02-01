@@ -4,13 +4,15 @@ import PostList from "../components/PostList";
 import Typography from "@mui/material/Typography";
 import PostSelect from "../components/PostSelect";
 import { TextField } from "@mui/material";
-import axios from "axios";
 import PostService from "../API/PostService";
 
 function Home() {
   interface ISelectedSort {
     title: string;
     body: string;
+  }
+  interface IPost {
+    id: number;
   }
 
   const [posts, setPosts] = useState([]);
@@ -31,7 +33,7 @@ function Home() {
   }
 
   const removePost = (postId: number) => {
-    const newPostList = posts.filter((post) => post.id !== postId);
+    const newPostList = posts.filter((post: IPost) => post.id !== postId);
 
     setPosts(newPostList);
   };
