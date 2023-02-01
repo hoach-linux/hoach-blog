@@ -17,9 +17,9 @@ const PostList = ({
         {title}
       </Typography>
       {posts
-        .map((post: any, index) => (
+        .map((post: any) => (
           <div className="posts" key={post.id}>
-            <Post number={index + 1} post={post} remove={remove} />
+            <Post post={post} remove={remove} />
           </div>
         ))
         .reverse()}

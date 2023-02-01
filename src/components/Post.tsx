@@ -4,7 +4,7 @@ import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import "../assets/style/post.css";
 
-const Post = (props: any, number: number, remove: any) => {
+const Post = (props: any, remove: any) => {
   const removePost = () => {
     props.remove(props.post.id);
   };
@@ -15,7 +15,7 @@ const Post = (props: any, number: number, remove: any) => {
         <Typography gutterBottom level="h5" component="div">
           {props.post.title}
         </Typography>
-        <Typography level="body2">{props.number}</Typography>
+        <Typography level="body2">{props.post.id}</Typography>
         <Typography level="body2">{props.post.body}</Typography>
         <Button
           size="lg"
