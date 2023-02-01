@@ -17,6 +17,7 @@ import Modal from "@mui/joy/Modal";
 import ButtonJoy from "@mui/joy/Button";
 import Add from "@mui/icons-material/Add";
 import PostModalDialog from "./PostModalDialog";
+import { Link } from "react-router-dom";
 
 interface Props {
   create: any;
@@ -24,7 +25,7 @@ interface Props {
 }
 
 const drawerWidth = "fullWidth";
-const navItems = ["Home", "About", "Contact"];
+const navItems = ["About", "Favorites"];
 const anchor = "bottom";
 
 const Navbar = (props: Props, create: any) => {
@@ -72,7 +73,7 @@ const Navbar = (props: Props, create: any) => {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar component="nav">
-          <Toolbar>
+          <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
             {/* <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -84,26 +85,34 @@ const Navbar = (props: Props, create: any) => {
             </IconButton> */}
             <Typography
               variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: "block" }}
+              component={Link}
+              to="/"
+              sx={{ display: "block", color: "#fff", "&:hover": {color: "#fff"} }}
             >
               MUI
             </Typography>
-            <ButtonJoy
-              variant="soft"
-              color="primary"
-              startDecorator={<Add />}
-              onClick={() => setOpen(true)}
-              sx={{ mr: { sm: 2 } }}
-            >
-              New post
-            </ButtonJoy>
-            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-              {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#fff" }}>
-                  {item}
-                </Button>
-              ))}
+            <Box sx={{display: "flex"}}>
+              <ButtonJoy
+                variant="soft"
+                color="primary"
+                startDecorator={<Add />}
+                onClick={() => setOpen(true)}
+                sx={{ mr: { sm: 2 } }}
+              >
+                New post
+              </ButtonJoy>
+              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                {navItems.map((item) => (
+                  <Button
+                    component={Link}
+                    to={item.toLocaleLowerCase()}
+                    key={item}
+                    sx={{ color: "#fff", "&:hover": { color: "#fff" } }}
+                  >
+                    {item}
+                  </Button>
+                ))}
+              </Box>
             </Box>
           </Toolbar>
         </AppBar>
