@@ -12,7 +12,6 @@ import PostModalDialog from "./PostModalDialog";
 import { Link } from "react-router-dom";
 
 interface Props {
-  create: any;
   window?: () => Window;
 }
 
