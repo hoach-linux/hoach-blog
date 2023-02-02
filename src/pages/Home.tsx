@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Divider from "@mui/joy/Divider";
 import PostList from "../components/PostList";
 import Typography from "@mui/material/Typography";
@@ -17,10 +17,25 @@ function Home() {
 
   const [posts, setPosts] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const options = [
     { value: "title", name: "Title" },
     { value: "body", name: "Description" },
   ];
+  const sortedPosts = useMemo(() => {
+    if (selectedSort) {
+      return [...posts].sort((a: any, b: any) =>
+        a[selectedSort].localeCompare(b[selectedSort])
+      );
+    }
+    return posts;
+  }, [selectedSort, posts]);
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPosts.filter((post: any) =>
+      post.title.toLocaleLowerCase().includes(searchQuery)
+    );
+  }, [searchQuery, sortedPosts]);
 
   useEffect(() => {
     fetchPosts();
@@ -39,20 +54,14 @@ function Home() {
   };
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);
-
-    setPosts(
-      [...posts].sort((a, b) =>
-        a[sort as keyof ISelectedSort].localeCompare(
-          b[sort as keyof ISelectedSort]
-        )
-      )
-    );
   };
 
   return (
     <div className="App">
       <TextField
         className="input"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         fullWidth
         id="outlined-basic"
         label="Search"
@@ -70,8 +79,12 @@ function Home() {
         defaultValue="Sort"
         change={sortPosts}
       />
-      {posts.length ? (
-        <PostList posts={posts} title="Posts" remove={removePost} />
+      {sortedAndSearchedPosts.length ? (
+        <PostList
+          posts={sortedAndSearchedPosts}
+          title="Posts"
+          remove={removePost}
+        />
       ) : (
         <Typography
           variant="h3"
@@ -79,7 +92,7 @@ function Home() {
           style={{ marginTop: "50px" }}
           className="paragraph"
         >
-          Postlist is empty
+          Posts not found
         </Typography>
       )}
     </div>
