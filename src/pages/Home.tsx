@@ -71,7 +71,7 @@ function Home() {
         change={sortPosts}
       />
       {sortedAndSearchedPosts.length ? (
-        <PostList posts={sortedAndSearchedPosts} title="Posts" />
+        <PostList posts={sortedAndSearchedPosts} title="Technology" />
       ) : (
         <Typography
           variant="h3"

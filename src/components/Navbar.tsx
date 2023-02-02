@@ -5,29 +5,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Modal from "@mui/joy/Modal";
 import ButtonJoy from "@mui/joy/Button";
-import Add from "@mui/icons-material/Add";
-import PostModalDialog from "./PostModalDialog";
 import { Link } from "react-router-dom";
-
-interface Props {
-  window?: () => Window;
-}
 
 const navItems = ["Favorites", "About"];
 
-const Navbar = (props: Props) => {
-  const { window } = props;
-  const [open, setOpen] = React.useState(false);
-
-  const closeModal = (isCloseModal: boolean) => {
-    setOpen(isCloseModal);
-  };
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
+const Navbar = () => {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex" }}>
@@ -72,13 +55,6 @@ const Navbar = (props: Props) => {
           </Toolbar>
         </AppBar>
       </Box>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <PostModalDialog
-          close={closeModal}
-          title="Create new post"
-          offer="Fill in the information of the post."
-        />
-      </Modal>
     </React.Fragment>
   );
 };
