@@ -3,13 +3,7 @@ import Post from "./Post";
 import Typography from "@mui/material/Typography";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const PostList = ({
-  posts,
-  title,
-}: {
-  posts: object[];
-  title: string;
-}) => {
+const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
   const nodeRef = React.useRef(null);
 
   return (
@@ -19,19 +13,17 @@ const PostList = ({
       </Typography>
       <div className="posts">
         <TransitionGroup>
-          {posts
-            .map((post: any) => (
-              <CSSTransition
-                in={true}
-                key={post.id}
-                nodeRef={nodeRef}
-                timeout={500}
-                classNames="post"
-              >
-                <Post post={post} />
-              </CSSTransition>
-            ))
-            .reverse()}
+          {posts.map((post: any) => (
+            <CSSTransition
+              in={true}
+              key={post.title}
+              nodeRef={nodeRef}
+              timeout={500}
+              classNames="post"
+            >
+              <Post post={post} />
+            </CSSTransition>
+          ))}
         </TransitionGroup>
       </div>
     </div>
