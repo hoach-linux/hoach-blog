@@ -7,10 +7,6 @@ import { TextField } from "@mui/material";
 import PostService from "../API/PostService";
 
 function Home() {
-  interface ISelectedSort {
-    title: string;
-    body: string;
-  }
   interface IPost {
     id: number;
   }
