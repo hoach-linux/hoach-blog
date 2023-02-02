@@ -13,7 +13,7 @@ const Post = (props: any) => {
         <CardOverflow>
           <AspectRatio ratio="2">
             <img
-              src={props.post.urlToImage}
+              src={props.post.image_url}
               srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
               loading="lazy"
               alt=""
