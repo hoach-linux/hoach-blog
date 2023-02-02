@@ -47,16 +47,16 @@ const Navbar = (props: Props) => {
               MUI
             </Typography>
             <Box sx={{ display: "flex" }}>
-              <ButtonJoy
-                variant="soft"
-                color="primary"
-                startDecorator={<Add />}
-                onClick={() => setOpen(true)}
-                sx={{ mr: { sm: 2 } }}
-              >
-                New post
-              </ButtonJoy>
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                <ButtonJoy
+                  variant="soft"
+                  color="primary"
+                  component={Link}
+                  to={"/"}
+                  sx={{ mr: { sm: 2 } }}
+                >
+                  Home
+                </ButtonJoy>
                 {navItems.map((item) => (
                   <Button
                     component={Link}

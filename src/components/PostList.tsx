@@ -6,11 +6,9 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 const PostList = ({
   posts,
   title,
-  remove,
 }: {
   posts: object[];
   title: string;
-  remove: any;
 }) => {
   const nodeRef = React.useRef(null);
 
@@ -24,12 +22,13 @@ const PostList = ({
           {posts
             .map((post: any) => (
               <CSSTransition
+                in={true}
                 key={post.id}
                 nodeRef={nodeRef}
                 timeout={500}
                 classNames="post"
               >
-                <Post post={post} remove={remove} />
+                <Post post={post} />
               </CSSTransition>
             ))
             .reverse()}

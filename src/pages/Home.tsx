@@ -17,7 +17,7 @@ function Home() {
 
   const options = [
     { value: "title", name: "Title" },
-    { value: "body", name: "Description" },
+    { value: "content", name: "Content" },
   ];
   const sortedPosts = useMemo(() => {
     if (selectedSort) {
@@ -43,11 +43,6 @@ function Home() {
     setPosts(posts);
   }
 
-  const removePost = (postId: number) => {
-    const newPostList = posts.filter((post: IPost) => post.id !== postId);
-
-    setPosts(newPostList);
-  };
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);
   };
@@ -76,11 +71,7 @@ function Home() {
         change={sortPosts}
       />
       {sortedAndSearchedPosts.length ? (
-        <PostList
-          posts={sortedAndSearchedPosts}
-          title="Posts"
-          remove={removePost}
-        />
+        <PostList posts={sortedAndSearchedPosts} title="Posts" />
       ) : (
         <Typography
           variant="h3"
