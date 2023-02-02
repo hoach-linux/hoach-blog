@@ -4,6 +4,7 @@ import PostList from "../components/PostList";
 import Typography from "@mui/material/Typography";
 import PostSelect from "../components/PostSelect";
 import { TextField } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import PostService from "../API/PostService";
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isloading, setIsloading] = useState(false);
 
   const options = [
     { value: "title", name: "Title" },
@@ -29,7 +31,7 @@ function Home() {
   }, [selectedSort, posts]);
   const sortedAndSearchedPosts = useMemo(() => {
     return sortedPosts.filter((post: any) =>
-      post.title.toLocaleLowerCase().includes(searchQuery)
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery, sortedPosts]);
 
@@ -38,9 +40,13 @@ function Home() {
   }, []);
 
   async function fetchPosts() {
+    setIsloading(true);
+
     const posts = await PostService.getAll();
 
     setPosts(posts);
+
+    setIsloading(false);
   }
 
   const sortPosts = (sort: string) => {
@@ -70,7 +76,11 @@ function Home() {
         defaultValue="Sort"
         change={sortPosts}
       />
-      {sortedAndSearchedPosts.length ? (
+      {isloading ? (
+        <LoadingButton loading fullWidth variant="outlined">
+          Submit
+        </LoadingButton>
+      ) : sortedAndSearchedPosts.length && !isloading ? (
         <PostList posts={sortedAndSearchedPosts} title="Technology" />
       ) : (
         <Typography

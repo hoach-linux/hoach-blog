@@ -1,6 +1,7 @@
 import * as React from "react";
 import Post from "./Post";
 import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
@@ -11,7 +12,7 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
       <Typography variant="h3" component="h3" className="paragraph">
         {title}
       </Typography>
-      <div className="posts">
+      <List className="posts">
         <TransitionGroup>
           {posts.map((post: any) => (
             <CSSTransition
@@ -25,7 +26,7 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
             </CSSTransition>
           ))}
         </TransitionGroup>
-      </div>
+      </List>
     </div>
   );
 };

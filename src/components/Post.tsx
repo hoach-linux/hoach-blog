@@ -14,7 +14,7 @@ const Post = (props: any) => {
           <AspectRatio ratio="2">
             <img
               src={props.post.image}
-              srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+              srcSet="https://images.unsplash.com/photo-1674420628423-bf7a338af32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
               loading="lazy"
               alt=""
             />
