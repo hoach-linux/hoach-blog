@@ -25,7 +25,7 @@ const Post = (props: any) => {
         </Typography>
         <Typography level="body2">{props.post.id}</Typography>
         <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-          {props.post.description}
+          {props.post.body}
         </Typography>
         <Button size="lg" className="remove_button" variant="soft" fullWidth>
           Read more

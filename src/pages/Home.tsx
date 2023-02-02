@@ -17,7 +17,7 @@ function Home() {
 
   const options = [
     { value: "title", name: "Title" },
-    { value: "description", name: "Description" },
+    { value: "body", name: "Description" },
   ];
   const sortedPosts = useMemo(() => {
     if (selectedSort) {
