@@ -7,9 +7,7 @@ export default class PostService {
       params: {
         category: "technology",
         sortBy: "popularity",
-      },
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
+        apiKey: apiKey,
       },
     });
 
