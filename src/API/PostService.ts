@@ -7,8 +7,8 @@ export default class PostService {
 
     const response = await axios.get(url, {
       params: {
-        limit: limit,
-        page: 1
+        _limit: limit,
+        _page: 1
       },
     });
 

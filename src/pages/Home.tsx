@@ -87,17 +87,8 @@ function Home() {
         >
           Submit
         </LoadingButton>
-      ) : sortedAndSearchedPosts.length && !isloading ? (
-        <PostList posts={sortedAndSearchedPosts} title="Technology" />
       ) : (
-        <Typography
-          variant="h3"
-          component="h3"
-          style={{ marginTop: "50px" }}
-          className="paragraph"
-        >
-          Posts not found
-        </Typography>
+        <PostList posts={sortedAndSearchedPosts} title="Technology" />
       )}
     </div>
   );

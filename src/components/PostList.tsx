@@ -8,20 +8,33 @@ import { Box } from "@mui/material";
 
 const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
   return (
-    <Box className="post_list">
-      <Typography variant="h3" component="h3" className="paragraph">
-        {title}
-      </Typography>
-      <List className="posts">
-        <TransitionGroup>
-          {posts.map((post: any) => (
-            <Grow key={post.id}>
-              <Post post={post} />
-            </Grow>
-          ))}
-        </TransitionGroup>
-      </List>
-    </Box>
+    <div>
+      {posts.length ? (
+        <Box className="post_list">
+          <Typography variant="h3" component="h3" className="paragraph">
+            {title}
+          </Typography>
+          <List className="posts">
+            <TransitionGroup>
+              {posts.map((post: any) => (
+                <Grow key={post.id}>
+                  <Post post={post} />
+                </Grow>
+              ))}
+            </TransitionGroup>
+          </List>
+        </Box>
+      ) : (
+        <Typography
+          variant="h3"
+          component="h3"
+          style={{ marginTop: "50px" }}
+          className="paragraph"
+        >
+          Posts not found
+        </Typography>
+      )}
+    </div>
   );
 };
 
