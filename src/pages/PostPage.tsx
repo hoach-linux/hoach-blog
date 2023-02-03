@@ -46,7 +46,7 @@ const PostPage = () => {
           {errorMessage}
         </Typography>
       )}
-      <Box>
+      <Box sx={{ mt: 2 }}>
         {errorMessageComments && (
           <Typography
             variant="h3"
