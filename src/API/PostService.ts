@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class PostService {
   static async getAll() {
-    const url: string = "https://jsonplaceholder.typicode.com/posts";
+    const url: string = "https://jsonplaceholder.typicode.com/postsadfs";
     const limit: number = 50;
 
     const response = await axios.get(url, {
