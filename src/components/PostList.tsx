@@ -17,7 +17,7 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
           <List className="posts">
             <TransitionGroup>
               {posts.map((post: any) => (
-                <Grow key={post.id}>
+                <Grow in key={post.id}>
                   <Post post={post} />
                 </Grow>
               ))}

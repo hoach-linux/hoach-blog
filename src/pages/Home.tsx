@@ -10,6 +10,9 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Zoom from "@mui/material/Zoom";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { usePosts } from "../hooks/usePosts";
+import { useFetching } from "../hooks/useFetching";
 
 function Home() {
   interface IPost {
@@ -19,37 +22,22 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [isloading, setIsloading] = useState(true);
+  const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
+    const posts = await PostService.getAll();
+
+    setPosts(posts);
+  });
 
   const options = [
     { value: "title", name: "Title" },
     { value: "body", name: "Description" },
   ];
-  const sortedPosts = useMemo(() => {
-    if (selectedSort) {
-      return [...posts].sort((a: any, b: any) =>
-        a[selectedSort].localeCompare(b[selectedSort])
-      );
-    }
-    return posts;
-  }, [selectedSort, posts]);
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter((post: any) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery, sortedPosts]);
+
+  const sortedAndSearchedPosts = usePosts(posts, selectedSort, searchQuery);
 
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  async function fetchPosts() {
-    const posts = await PostService.getAll();
-
-    setPosts(posts);
-
-    setIsloading(false);
-  }
 
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);
@@ -57,7 +45,12 @@ function Home() {
 
   return (
     <div className="App">
-      {isloading ? (
+      {errorMessage && (
+        <Typography variant="h3" component="h3" className="paragraph">
+          {errorMessage}
+        </Typography>
+      )}
+      {isLoading || errorMessage ? (
         <Circular />
       ) : (
         <Box>
