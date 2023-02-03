@@ -2,32 +2,26 @@ import * as React from "react";
 import Post from "./Post";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { TransitionGroup } from "react-transition-group";
+import Grow from "@mui/material/Grow";
+import { Box } from "@mui/material";
 
 const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
-  const nodeRef = React.useRef(null);
-
   return (
-    <div className="post_list">
+    <Box className="post_list">
       <Typography variant="h3" component="h3" className="paragraph">
         {title}
       </Typography>
       <List className="posts">
         <TransitionGroup>
           {posts.map((post: any) => (
-            <CSSTransition
-              in={true}
-              key={post.title}
-              nodeRef={nodeRef}
-              timeout={500}
-              classNames="post"
-            >
+            <Grow key={post.id}>
               <Post post={post} />
-            </CSSTransition>
+            </Grow>
           ))}
         </TransitionGroup>
       </List>
-    </div>
+    </Box>
   );
 };
 
