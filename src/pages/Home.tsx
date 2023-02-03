@@ -82,6 +82,7 @@ function Home() {
           fullWidth
           variant="outlined"
           size="large"
+          loadingIndicator="Loading…"
           style={{ marginTop: "50px" }}
         >
           Submit
