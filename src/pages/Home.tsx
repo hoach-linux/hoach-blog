@@ -3,8 +3,8 @@ import Divider from "@mui/joy/Divider";
 import PostList from "../components/PostList";
 import PostSelect from "../components/PostSelect";
 import { TextField } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
 import PostService from "../API/PostService";
+import Circular from "../components/Circular";
 import { Box } from "@mui/material";
 
 function Home() {
@@ -54,16 +54,7 @@ function Home() {
   return (
     <div className="App">
       {isloading ? (
-        <LoadingButton
-          loading
-          fullWidth
-          variant="outlined"
-          size="large"
-          loadingIndicator="Loading…"
-          style={{ marginTop: "50px" }}
-        >
-          Submit
-        </LoadingButton>
+        <Circular />
       ) : (
         <Box>
           <TextField
