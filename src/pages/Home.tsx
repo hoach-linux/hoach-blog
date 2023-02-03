@@ -77,7 +77,13 @@ function Home() {
         change={sortPosts}
       />
       {isloading ? (
-        <LoadingButton loading fullWidth variant="outlined">
+        <LoadingButton
+          loading
+          fullWidth
+          variant="outlined"
+          size="large"
+          style={{ marginTop: "50px" }}
+        >
           Submit
         </LoadingButton>
       ) : sortedAndSearchedPosts.length && !isloading ? (
