@@ -6,6 +6,10 @@ import { TextField } from "@mui/material";
 import PostService from "../API/PostService";
 import Circular from "../components/Circular";
 import { Box } from "@mui/material";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import Zoom from "@mui/material/Zoom";
+import Paper from "@mui/material/Paper";
 
 function Home() {
   interface IPost {
