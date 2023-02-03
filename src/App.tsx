@@ -1,11 +1,9 @@
 import "./style/App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Favorites from "./pages/Favorites";
+import { BrowserRouter } from "react-router-dom";
 import LabelBottomNavigation from "./components/LabelBottomNavigation";
-import About from "./pages/About";
 import Navbar from "./components/Navbar";
 import Toolbar from "@mui/material/Toolbar";
+import AppRouter from "./components/AppRouter";
 
 function App() {
   return (
@@ -13,11 +11,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Toolbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
+        <AppRouter />
         <Toolbar />
         <LabelBottomNavigation />
       </BrowserRouter>

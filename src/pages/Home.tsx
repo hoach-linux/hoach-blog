@@ -46,7 +46,12 @@ function Home() {
   return (
     <div className="App">
       {errorMessage && (
-        <Typography variant="h3" component="h3" className="paragraph">
+        <Typography
+          variant="h3"
+          component="h3"
+          className="paragraph"
+          style={{ marginTop: "50px" }}
+        >
           {errorMessage}
         </Typography>
       )}

@@ -5,8 +5,12 @@ import CardOverflow from "@mui/joy/CardOverflow";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Button from "@mui/joy/Button";
 import "../assets/style/post.css";
+import { useNavigate } from "react-router-dom";
 
 const Post = React.forwardRef((props: any, ref: any) => {
+  const navigate = useNavigate();
+  const currentLocation = window.location.pathname;
+
   return (
     <Card variant="outlined" ref={ref} sx={{ maxWidth: 945 }} className="post">
       <CardOverflow>
@@ -26,9 +30,17 @@ const Post = React.forwardRef((props: any, ref: any) => {
       <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
         {props.post.body}
       </Typography>
-      <Button size="lg" className="remove_button" variant="soft" fullWidth>
-        Read more
-      </Button>
+      {currentLocation === "/" && (
+        <Button
+          size="lg"
+          className="remove_button"
+          variant="soft"
+          fullWidth
+          onClick={() => navigate(`/posts/${props.post.id}`)}
+        >
+          Read more
+        </Button>
+      )}
     </Card>
   );
 });
