@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Divider from "@mui/joy/Divider";
 import PostList from "../components/PostList";
 import PostSelect from "../components/PostSelect";
@@ -13,20 +13,29 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
+import { getTotalCount } from "../utils/pages";
 
 function Home() {
   interface IPost {
     id: number;
   }
 
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(10);
+  let [page, setPage] = useState(1);
   const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
-    const posts = await PostService.getAll();
+    const response = await PostService.getAll(limit, page);
+    const totalCount = response.headers["x-total-count"];
 
-    setPosts(posts);
+    setTotalPages(getTotalCount(totalCount, limit));
+    setPosts([...posts, ...response.data]);
   });
+
+  const lastElement: any = useRef();
+  const observer: any = useRef();
 
   const options = [
     { value: "title", name: "Title" },
@@ -35,9 +44,23 @@ function Home() {
 
   const sortedAndSearchedPosts = usePosts(posts, selectedSort, searchQuery);
 
+  console.log(page);
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (observer.current) observer.current.disconnect();
+
+    var callback = function (entries: any, observer: any) {
+      if (entries[0].isIntersecting && page < totalPages) {
+        setPage(page + 1);
+      }
+    };
+    observer.current = new IntersectionObserver(callback);
+    observer.current.observe(lastElement.current);
+  }, [isLoading]);
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [page]);
 
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);
@@ -45,6 +68,27 @@ function Home() {
 
   return (
     <div className="App">
+      <TextField
+        className="input"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        fullWidth
+        id="outlined-basic"
+        label="Search"
+        variant="outlined"
+        inputProps={{ minLength: 1 }}
+      />
+      <Divider
+        style={{ marginBottom: "10px", marginTop: "10px" }}
+        component="div"
+        role="presentation"
+      />
+      <PostSelect
+        options={options}
+        value={selectedSort}
+        defaultValue="Sort"
+        change={sortPosts}
+      />
       {errorMessage && (
         <Typography
           variant="h3"
@@ -55,34 +99,9 @@ function Home() {
           {errorMessage}
         </Typography>
       )}
-      {isLoading || errorMessage ? (
-        <Circular />
-      ) : (
-        <Box>
-          <TextField
-            className="input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            fullWidth
-            id="outlined-basic"
-            label="Search"
-            variant="outlined"
-            inputProps={{ minLength: 1 }}
-          />
-          <Divider
-            style={{ marginBottom: "10px", marginTop: "10px" }}
-            component="div"
-            role="presentation"
-          />
-          <PostSelect
-            options={options}
-            value={selectedSort}
-            defaultValue="Sort"
-            change={sortPosts}
-          />
-          <PostList posts={sortedAndSearchedPosts} title="Technology" />
-        </Box>
-      )}
+      <PostList posts={sortedAndSearchedPosts} title="Technology" />
+      <div ref={lastElement} style={{ height: 0 }} />
+      {isLoading && <Circular />}
     </div>
   );
 }
