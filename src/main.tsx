@@ -11,10 +11,11 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { RouterProvider } from "react-router-dom";
 import { routes } from "./router/routes";
+import Circular from "./components/Circular";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={routes} />
+    <RouterProvider router={routes} fallbackElement={<Circular />} />
     <CssVarsProvider></CssVarsProvider>
   </React.StrictMode>
 );

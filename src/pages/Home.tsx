@@ -44,8 +44,6 @@ function Home() {
 
   const sortedAndSearchedPosts = usePosts(posts, selectedSort, searchQuery);
 
-  console.log(page);
-
   useEffect(() => {
     if (isLoading) return;
     if (observer.current) observer.current.disconnect();
