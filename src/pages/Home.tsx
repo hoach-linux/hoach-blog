@@ -23,17 +23,17 @@ function Home() {
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [totalPages, setTotalPages] = useState(1);
+  let [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(1);
-
   let [page, setPage] = useState(1);
   const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
     const [response, totalPages] = await PostService.getAll(limit);
 
-    setTotalPages(totalPages)
+    setTotalPages(totalPages);
 
     setPosts([...posts, ...response.data]);
   });
+  console.log(totalPages)
 
   const lastElement: any = useRef();
   const observer: any = useRef();
