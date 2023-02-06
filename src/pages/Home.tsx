@@ -23,24 +23,23 @@ function Home() {
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  let [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(10);
   let [page, setPage] = useState(1);
   const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
-    const [response, totalPages] = await PostService.getAll(limit);
+    const response = await PostService.getAll(limit, page);
+    const totalCount = response.meta.total_count
 
-    setTotalPages(totalPages);
-
+    setTotalPages(getTotalPage(totalCount, limit));
     setPosts([...posts, ...response.data]);
   });
-  console.log(totalPages)
 
   const lastElement: any = useRef();
   const observer: any = useRef();
 
   const options = [
     { value: "title", name: "Title" },
-    { value: "description", name: "Description" },
+    { value: "body", name: "Description" },
   ];
 
   const sortedAndSearchedPosts = usePosts(posts, selectedSort, searchQuery);
@@ -51,7 +50,7 @@ function Home() {
 
     var callback = function (entries: any, observer: any) {
       if (entries[0].isIntersecting && page < totalPages) {
-        setTotalPages(totalPages - 1);
+        setPage(page + 1);
       }
     };
     observer.current = new IntersectionObserver(callback);
