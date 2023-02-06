@@ -11,7 +11,12 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
     <div>
       {posts.length ? (
         <Box className="post_list">
-          <Typography variant="h3" component="h3" className="paragraph">
+          <Typography
+            variant="h3"
+            component="h3"
+            className="paragraph"
+            sx={{ textAlign: "left" }}
+          >
             {title}
           </Typography>
           <List className="posts">
@@ -20,7 +25,7 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
                 <Grow in key={post.id}>
                   <Post post={post} />
                 </Grow>
-              ))}
+              )).reverse()}
             </TransitionGroup>
           </List>
         </Box>

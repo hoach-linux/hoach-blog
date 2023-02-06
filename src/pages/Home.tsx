@@ -13,7 +13,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
-import { getTotalCount } from "../utils/pages";
+import { getTotalPage } from "../utils/pages";
 
 function Home() {
   interface IPost {
@@ -23,14 +23,15 @@ function Home() {
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [totalPages, setTotalPages] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(1);
+
   let [page, setPage] = useState(1);
   const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
-    const response = await PostService.getAll(limit, page);
-    const totalCount = response.headers["x-total-count"];
+    const [response, totalPages] = await PostService.getAll(limit);
 
-    setTotalPages(getTotalCount(totalCount, limit));
+    setTotalPages(totalPages)
+
     setPosts([...posts, ...response.data]);
   });
 
@@ -39,7 +40,7 @@ function Home() {
 
   const options = [
     { value: "title", name: "Title" },
-    { value: "body", name: "Description" },
+    { value: "description", name: "Description" },
   ];
 
   const sortedAndSearchedPosts = usePosts(posts, selectedSort, searchQuery);
@@ -50,7 +51,7 @@ function Home() {
 
     var callback = function (entries: any, observer: any) {
       if (entries[0].isIntersecting && page < totalPages) {
-        setPage(page + 1);
+        setTotalPages(totalPages - 1);
       }
     };
     observer.current = new IntersectionObserver(callback);
@@ -97,7 +98,7 @@ function Home() {
           {errorMessage}
         </Typography>
       )}
-      <PostList posts={sortedAndSearchedPosts} title="Technology" />
+      <PostList posts={sortedAndSearchedPosts} title="All Posts" />
       <div ref={lastElement} style={{ height: 0 }} />
       {isLoading && <Circular />}
     </div>

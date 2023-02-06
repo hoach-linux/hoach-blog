@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import ButtonJoy from "@mui/joy/Button";
 import { Link } from "react-router-dom";
 
-const navItems = ["Favorites", "About"];
+const navItems = ["About"];
 
 const Navbar = () => {
   return (
@@ -27,7 +27,7 @@ const Navbar = () => {
                 "&:hover": { color: "#fff" },
               }}
             >
-              MUI
+              NB
             </Typography>
             <Box sx={{ display: "flex" }}>
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>

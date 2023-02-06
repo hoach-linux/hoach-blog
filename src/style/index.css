@@ -34,15 +34,15 @@ body {
 
 .post_list > .paragraph {
   margin-top: 50px;
+}
+.paragraph {
   text-align: center;
 }
 .form .form_input,
 .form .form_button {
   margin-top: 10px;
 }
-.paragraph {
-  text-align: center;
-}
+
 .post .remove_button {
   margin-top: 7px;
 }

@@ -10,14 +10,15 @@ import { useNavigate } from "react-router-dom";
 const Post = React.forwardRef((props: any, ref: any) => {
   const navigate = useNavigate();
   const currentLocation = window.location.pathname;
+  const image: string = `https://directus.hoach.skryonline.com/assets/${props.post.image}`;
 
   return (
     <Card variant="outlined" ref={ref} sx={{ maxWidth: 945 }} className="post">
       <CardOverflow>
         <AspectRatio ratio="2">
           <img
-            src={props.post.image}
-            srcSet="https://images.unsplash.com/photo-1674420628423-bf7a338af32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
+            srcSet={image}
+            src="https://images.unsplash.com/photo-1674420628423-bf7a338af32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
             loading="lazy"
             alt=""
           />
@@ -27,19 +28,25 @@ const Post = React.forwardRef((props: any, ref: any) => {
         {props.post.title}
       </Typography>
       <Typography level="body2">{props.post.id}</Typography>
-      <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-        {props.post.body}
-      </Typography>
-      {currentLocation === "/" && (
-        <Button
-          size="lg"
-          className="remove_button"
-          variant="soft"
-          fullWidth
-          onClick={() => navigate(`/posts/${props.post.id}`)}
-        >
-          Read more
-        </Button>
+      {currentLocation === "/" ? (
+        <div>
+          <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
+            {props.post.description}
+          </Typography>
+          <Button
+            size="lg"
+            className="remove_button"
+            variant="soft"
+            fullWidth
+            onClick={() => navigate(`/posts/${props.post.id}`)}
+          >
+            Read more
+          </Button>
+        </div>
+      ) : (
+        <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
+          {props.post.body}
+        </Typography>
       )}
     </Card>
   );

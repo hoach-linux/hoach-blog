@@ -38,13 +38,13 @@ export default function LabelBottomNavigation() {
           value="/"
           icon={<HomeIcon />}
         />
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           component={Link}
           to="/favorites"
           label="Favorites"
           value="/favorites"
           icon={<FavoriteIcon />}
-        />
+        /> */}
         <BottomNavigationAction
           component={Link}
           to="/about"
