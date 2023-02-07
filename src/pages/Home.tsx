@@ -1,15 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Divider from "@mui/joy/Divider";
 import PostList from "../components/PostList";
 import PostSelect from "../components/PostSelect";
 import { TextField } from "@mui/material";
 import PostService from "../API/PostService";
 import Circular from "../components/Circular";
-import { Box } from "@mui/material";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import Zoom from "@mui/material/Zoom";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
@@ -23,15 +18,20 @@ function Home() {
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [totalPages, setTotalPages] = useState(1);
+  let [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   let [page, setPage] = useState(1);
-  const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
-    const response = await PostService.getAll(limit, page);
-    const totalCount = response.meta.total_count
+  const [lastPage] = useFetching(async () => {
+    const response = await PostService.getTotalCount();
+    const allPages = getTotalPage(response, limit);
 
-    setTotalPages(getTotalPage(totalCount, limit));
-    setPosts([...posts, ...response.data]);
+    setTotalPages(allPages);
+  });
+
+  const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
+    const response = await PostService.getAll(limit, totalPages);
+
+    setPosts([...posts, ...response.data.reverse()]);
   });
 
   const lastElement: any = useRef();
@@ -50,15 +50,18 @@ function Home() {
 
     var callback = function (entries: any, observer: any) {
       if (entries[0].isIntersecting && page < totalPages) {
-        setPage(page + 1);
+        setTotalPages(totalPages - 1);
       }
     };
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(lastElement.current);
   }, [isLoading]);
   useEffect(() => {
+    lastPage();
+  }, []);
+  useEffect(() => {
     fetchPosts();
-  }, [page]);
+  }, [totalPages]);
 
   const sortPosts = (sort: string) => {
     setSelectedSort(sort);

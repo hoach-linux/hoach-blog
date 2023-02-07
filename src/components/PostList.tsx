@@ -25,7 +25,7 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
                 <Grow in key={post.id}>
                   <Post post={post} />
                 </Grow>
-              )).reverse()}
+              ))}
             </TransitionGroup>
           </List>
         </Box>

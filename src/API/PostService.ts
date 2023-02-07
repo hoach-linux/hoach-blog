@@ -8,7 +8,6 @@ export default class PostService {
       params: {
         limit: limit,
         page: page,
-        meta: "total_count"
       },
     });
 
@@ -20,6 +19,18 @@ export default class PostService {
     const response = await axios.get(`${url}/${id}`);
 
     return response.data;
+  }
+  static async getTotalCount() {
+    const url: string = "https://directus.hoach.skryonline.com/items/posts";
+
+    const response = await axios.get(url, {
+      params: {
+        limit: 0,
+        meta: "total_count",
+      },
+    });
+
+    return response.data.meta.total_count;
   }
   static async getCommentsByPostId(id: string | undefined) {
     const url: string = "https://jsonplaceholder.typicode.com/posts";
