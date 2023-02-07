@@ -21,12 +21,16 @@ function Home() {
   let [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   let [page, setPage] = useState(1);
-  const [lastPage] = useFetching(async () => {
-    const response = await PostService.getTotalCount();
-    const allPages = getTotalPage(response, limit);
+  const [loadMorePosts, setLoadMorePosts] = useState(false);
+  const [lastPage, isLastPageLoading, lastPageErrorMessage] = useFetching(
+    async () => {
+      const [lastPagePosts, lastPage] = await PostService.getLastPage(limit);
 
-    setTotalPages(allPages);
-  });
+      setPosts(lastPagePosts.reverse());
+      setTotalPages(lastPage);
+      setLoadMorePosts(true);
+    }
+  );
 
   const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
     const response = await PostService.getAll(limit, totalPages);
@@ -60,7 +64,9 @@ function Home() {
     lastPage();
   }, []);
   useEffect(() => {
-    fetchPosts();
+    if (loadMorePosts) {
+      fetchPosts();
+    }
   }, [totalPages]);
 
   const sortPosts = (sort: string) => {
@@ -90,19 +96,20 @@ function Home() {
         defaultValue="Sort"
         change={sortPosts}
       />
-      {errorMessage && (
-        <Typography
-          variant="h3"
-          component="h3"
-          className="paragraph"
-          style={{ marginTop: "50px" }}
-        >
-          {errorMessage}
-        </Typography>
-      )}
+      {errorMessage ||
+        (lastPageErrorMessage && (
+          <Typography
+            variant="h3"
+            component="h3"
+            className="paragraph"
+            style={{ marginTop: "50px" }}
+          >
+            {errorMessage}
+          </Typography>
+        ))}
       <PostList posts={sortedAndSearchedPosts} title="All Posts" />
       <div ref={lastElement} style={{ height: 0 }} />
-      {isLoading && <Circular />}
+      {isLoading || (isLastPageLoading && <Circular />)}
     </div>
   );
 }

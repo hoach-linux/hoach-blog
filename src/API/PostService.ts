@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getTotalPage } from "../utils/pages";
 
 export default class PostService {
   static async getAll(limit: number, page: number) {
@@ -20,7 +21,7 @@ export default class PostService {
 
     return response.data;
   }
-  static async getTotalCount() {
+  static async getLastPage(limit: number) {
     const url: string = "https://directus.hoach.skryonline.com/items/posts";
 
     const response = await axios.get(url, {
@@ -30,7 +31,17 @@ export default class PostService {
       },
     });
 
-    return response.data.meta.total_count;
+    const totalCount = response.data.meta.total_count;
+    const totalPages = getTotalPage(totalCount, limit);
+
+    const pages = await axios.get(url, {
+      params: {
+        limit: limit,
+        page: totalPages,
+      },
+    });
+
+    return [pages.data.data, totalPages] as const;
   }
   static async getCommentsByPostId(id: string | undefined) {
     const url: string = "https://jsonplaceholder.typicode.com/posts";
