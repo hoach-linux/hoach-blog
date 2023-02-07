@@ -27,7 +27,7 @@ export default function LabelBottomNavigation() {
       elevation={3}
     >
       <BottomNavigation
-        sx={{ width: "fullWidth" }}
+        sx={{ width: "fullWidth", background: "#000" }}
         value={value}
         onChange={handleChange}
       >
@@ -35,6 +35,7 @@ export default function LabelBottomNavigation() {
           component={Link}
           to="/"
           label="Home"
+          sx={{ color: "#fff" }}
           value="/"
           icon={<HomeIcon />}
         />
@@ -49,6 +50,7 @@ export default function LabelBottomNavigation() {
           component={Link}
           to="/about"
           label="About"
+          sx={{ color: "#fff" }}
           value="/about"
           icon={<InfoIcon />}
         />
