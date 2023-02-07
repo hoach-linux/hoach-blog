@@ -3,7 +3,7 @@ import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import CardOverflow from "@mui/joy/CardOverflow";
 import AspectRatio from "@mui/joy/AspectRatio";
-import Button from "@mui/material/Button";
+import Button from "@mui/joy/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import "../assets/style/post.css";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -54,12 +54,14 @@ const Post = React.forwardRef((props: any, ref: any) => {
             aria-label="outlined primary button group"
           >
             <Button
-              variant="contained"
               onClick={() => navigate(`/posts/${props.post.id}`)}
+              fullWidth
+              size="lg"
+              sx={{ marginRight: 1 }}
             >
               Read more
             </Button>
-            <Button onClick={addToFavorites}>
+            <Button onClick={addToFavorites} size="lg" variant="soft">
               <FavoriteBorder />
             </Button>
           </ButtonGroup>
