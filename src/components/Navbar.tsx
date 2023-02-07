@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import ButtonJoy from "@mui/joy/Button";
 import { Link } from "react-router-dom";
 
-const navItems = ["About"];
+const navItems = ["Favorites", "About"];
 
 const Navbar = () => {
   return (

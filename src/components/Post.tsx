@@ -3,14 +3,28 @@ import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import CardOverflow from "@mui/joy/CardOverflow";
 import AspectRatio from "@mui/joy/AspectRatio";
-import Button from "@mui/joy/Button";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import "../assets/style/post.css";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 
 const Post = React.forwardRef((props: any, ref: any) => {
   const navigate = useNavigate();
   const currentLocation = window.location.pathname;
   const image: string = `https://directus.hoach.skryonline.com/assets/${props.post.image}`;
+
+  function addToFavorites() {
+    if (localStorage.getItem("favoritesPosts")) {
+      const favoritesPosts: any = localStorage.getItem("favoritesPosts");
+      localStorage.setItem(
+        "favoritesPosts",
+        JSON.stringify([...JSON.parse(favoritesPosts), props.post])
+      );
+    } else {
+      localStorage.setItem("favoritesPosts", JSON.stringify([props.post]));
+    }
+  }
 
   return (
     <Card variant="outlined" ref={ref} sx={{ maxWidth: 945 }} className="post">
@@ -33,15 +47,22 @@ const Post = React.forwardRef((props: any, ref: any) => {
           <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
             {props.post.description}
           </Typography>
-          <Button
-            size="lg"
-            className="remove_button"
-            variant="soft"
+          <ButtonGroup
+            variant="outlined"
+            size="large"
             fullWidth
-            onClick={() => navigate(`/posts/${props.post.id}`)}
+            aria-label="outlined primary button group"
           >
-            Read more
-          </Button>
+            <Button
+              variant="contained"
+              onClick={() => navigate(`/posts/${props.post.id}`)}
+            >
+              Read more
+            </Button>
+            <Button onClick={addToFavorites}>
+              <FavoriteBorder />
+            </Button>
+          </ButtonGroup>
         </div>
       ) : (
         <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>

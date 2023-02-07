@@ -1,12 +1,14 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
+import PostList from "../components/PostList";
+import { useState } from "react";
 
 const Favorites = () => {
+  const favoritesPosts: any = localStorage.getItem("favoritesPosts");
+  const posts = JSON.parse(favoritesPosts);
+  
   return (
     <div>
-      <Typography variant="h3" component="h3" className="paragraph">
-        Favorites Page
-      </Typography>
+      <PostList posts={posts} title="Favorites" />
     </div>
   );
 };

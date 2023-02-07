@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { CssVarsProvider } from "@mui/joy/styles";
-import Navbar from "./components/Navbar";
 
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
