@@ -15,7 +15,7 @@ const Navbar = () => {
     <React.Fragment>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar component="nav">
+        <AppBar component="nav" sx={{background: "#000"}}>
           <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography
               variant="h6"

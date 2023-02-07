@@ -10,10 +10,6 @@ import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
 
 function Home() {
-  interface IPost {
-    id: number;
-  }
-
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,21 +26,17 @@ function Home() {
       setLoadMorePosts(true);
     }
   );
-
   const [fetchPosts, isLoading, errorMessage] = useFetching(async () => {
     const response = await PostService.getAll(limit, totalPages);
 
     setPosts([...posts, ...response.data.reverse()]);
   });
-
   const lastElement: any = useRef();
   const observer: any = useRef();
-
   const options = [
     { value: "title", name: "Title" },
     { value: "body", name: "Description" },
   ];
-
   const sortedAndSearchedPosts = usePosts(posts, selectedSort, searchQuery);
 
   useEffect(() => {
