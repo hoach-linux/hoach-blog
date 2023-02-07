@@ -8,7 +8,6 @@ import Circular from "../components/Circular";
 import Typography from "@mui/material/Typography";
 import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
-import { getTotalPage } from "../utils/pages";
 
 function Home() {
   interface IPost {
