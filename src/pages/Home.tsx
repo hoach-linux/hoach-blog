@@ -8,6 +8,7 @@ import Circular from "../components/Circular";
 import Typography from "@mui/material/Typography";
 import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
+import { motion } from "framer-motion";
 
 function Home() {
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
@@ -65,7 +66,12 @@ function Home() {
   };
 
   return (
-    <div className="App">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+    >
       <TextField
         className="input"
         value={searchQuery}
@@ -101,7 +107,7 @@ function Home() {
       <PostList posts={sortedAndSearchedPosts} title="All Posts" />
       <div ref={lastElement} style={{ height: 0 }} />
       {isLoading || (isLastPageLoading && <Circular />)}
-    </div>
+    </motion.div>
   );
 }
 
