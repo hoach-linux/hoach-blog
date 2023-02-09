@@ -8,6 +8,7 @@ import { Box } from "@mui/system";
 import CommentList from "../components/CommentList";
 import Circular from "../components/Circular";
 import { Typography } from "@mui/material";
+import { motion } from "framer-motion";
 
 const PostPage = () => {
   const params = useParams();
@@ -31,7 +32,12 @@ const PostPage = () => {
     fetchComments();
   }, []);
   return (
-    <Box>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+    >
       {!isLoading && !errorMessage ? (
         <Post post={post} />
       ) : isLoading ? (
@@ -63,7 +69,7 @@ const PostPage = () => {
           <CommentList comments={comments} title="Comments" />
         )}
       </Box>
-    </Box>
+    </motion.div>
   );
 };
 
