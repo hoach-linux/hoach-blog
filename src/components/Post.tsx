@@ -19,13 +19,18 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const Post = React.forwardRef((props: any, ref: any) => {
-  const [open, setOpen] = React.useState(false);
+  const [snackbar, setSnackbar] = React.useState({
+    open: false,
+    vertical: "top" as "top",
+    horizontal: "center" as "center",
+  });
+  const { vertical, horizontal, open } = snackbar;
   const navigate = useNavigate();
   const currentLocation = window.location.pathname;
   const image: string = `https://directus.hoach.skryonline.com/assets/${props.post.image}`;
 
   const openSnackbar = () => {
-    setOpen(true);
+    setSnackbar({ ...snackbar, open: true });
   };
 
   const handleClose = (
@@ -36,7 +41,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
       return;
     }
 
-    setOpen(false);
+    setSnackbar({ ...snackbar, open: false });
   };
   function addToFavorites() {
     if (localStorage.getItem("favoritesPosts")) {
@@ -98,9 +103,14 @@ const Post = React.forwardRef((props: any, ref: any) => {
           {props.post.body}
         </Typography>
       )}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={snackbar.open}
+        anchorOrigin={{ vertical, horizontal }}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Post was added to favorites
+          {props.post.title} was added to favorites
         </Alert>
       </Snackbar>
     </Card>
