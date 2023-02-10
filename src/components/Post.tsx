@@ -4,12 +4,12 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
 import "../assets/style/post.css";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { CardActions } from "@mui/material";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -82,12 +82,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
             >
               {props.post.description}
             </Typography>
-            <ButtonGroup
-              variant="outlined"
-              size="large"
-              fullWidth
-              aria-label="outlined primary button group"
-            >
+            <CardActions>
               <Button
                 onClick={() => navigate(`/posts/${props.post.id}`)}
                 fullWidth
@@ -99,7 +94,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
               <Button onClick={addToFavorites} size="large">
                 <FavoriteBorder />
               </Button>
-            </ButtonGroup>
+            </CardActions>
           </div>
         ) : (
           <Typography
@@ -111,7 +106,6 @@ const Post = React.forwardRef((props: any, ref: any) => {
           </Typography>
         )}
       </CardContent>
-
       <Snackbar
         open={snackbar.open}
         anchorOrigin={{ vertical, horizontal }}
