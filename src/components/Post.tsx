@@ -93,7 +93,6 @@ const Post = React.forwardRef((props: any, ref: any) => {
                 fullWidth
                 variant="contained"
                 size="large"
-                sx={{ marginRight: 1 }}
               >
                 Read more
               </Button>
