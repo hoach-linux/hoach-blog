@@ -5,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import ButtonJoy from "@mui/joy/Button";
 import { Link } from "react-router-dom";
 
 const navItems = ["Favorites", "About"];
@@ -15,7 +14,7 @@ const Navbar = () => {
     <React.Fragment>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar component="nav" sx={{background: "#000"}}>
+        <AppBar component="nav" sx={{ background: "#000" }}>
           <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography
               variant="h6"
@@ -31,15 +30,15 @@ const Navbar = () => {
             </Typography>
             <Box sx={{ display: "flex" }}>
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-                <ButtonJoy
-                  variant="soft"
+                <Button
+                  variant="contained"
                   color="primary"
                   component={Link}
                   to={"/"}
                   sx={{ mr: { sm: 2 } }}
                 >
                   Home
-                </ButtonJoy>
+                </Button>
                 {navItems.map((item) => (
                   <Button
                     component={Link}

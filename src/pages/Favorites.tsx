@@ -1,6 +1,6 @@
 import * as React from "react";
 import PostList from "../components/PostList";
-import { Button } from "@mui/joy";
+import { Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const Favorites = () => {
         <PostList posts={posts} title="Favorites" />
       ) : (
         <Link to="/">
-          <Button size="lg" href="/" fullWidth>
+          <Button size="large" href="/" fullWidth>
             Add favorites
           </Button>
         </Link>

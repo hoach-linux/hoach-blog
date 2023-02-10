@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { CssVarsProvider } from "@mui/joy/styles";
 
 import "./style/index.css";
 import "@fontsource/roboto/300.css";
@@ -15,6 +14,5 @@ import Circular from "./components/Circular";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={routes} fallbackElement={<Circular />} />
-    <CssVarsProvider></CssVarsProvider>
   </React.StrictMode>
 );

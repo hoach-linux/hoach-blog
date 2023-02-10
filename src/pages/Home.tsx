@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Divider from "@mui/joy/Divider";
+import Divider from "@mui/material/Divider";
 import PostList from "../components/PostList";
 import PostSelect from "../components/PostSelect";
 import { TextField } from "@mui/material";
@@ -104,7 +104,10 @@ function Home() {
             {errorMessage}
           </Typography>
         ))}
-      <PostList posts={sortedAndSearchedPosts} title="All Posts" />
+      <PostList
+        posts={sortedAndSearchedPosts}
+        title="All Posts"
+      />
       <div ref={lastElement} style={{ height: 0 }} />
       {isLoading || (isLastPageLoading && <Circular />)}
     </motion.div>

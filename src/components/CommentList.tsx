@@ -1,5 +1,4 @@
 import * as React from "react";
-import Post from "./Post";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import { TransitionGroup } from "react-transition-group";

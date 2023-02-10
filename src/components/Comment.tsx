@@ -1,19 +1,35 @@
 import * as React from "react";
-import Card from "@mui/joy/Card";
-import Typography from "@mui/joy/Typography";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 
 const Comment = React.forwardRef((props: any, ref: any) => {
   return (
-    <Card variant="outlined" ref={ref} sx={{ maxWidth: 945, marginBottom: 1 }}>
-      <Typography level="h2" sx={{ fontSize: "xl", mt: 2 }}>
-        {props.comment.name}
-      </Typography>
-      <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-        {props.comment.email}
-      </Typography>
-      <Typography level="body2" sx={{ mt: 0.5, mb: 2 }}>
-        {props.comment.body}
-      </Typography>
+    <Card ref={ref} sx={{ maxWidth: 945, marginBottom: 1 }}>
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ fontSize: "xl", mt: 2 }}
+        >
+          {props.comment.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mt: 0.5, mb: 2 }}
+        >
+          {props.comment.email}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mt: 0.5, mb: 2 }}
+        >
+          {props.comment.body}
+        </Typography>
+      </CardContent>
     </Card>
   );
 });
