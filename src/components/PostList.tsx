@@ -11,14 +11,16 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
     <div>
       {posts.length ? (
         <Box className="post_list">
-          <Typography
-            variant="h3"
-            component="h3"
-            className="paragraph"
-            sx={{ textAlign: "left" }}
-          >
-            {title}
-          </Typography>
+          {title.length !== 0 && (
+            <Typography
+              variant="h3"
+              component="h3"
+              className="paragraph"
+              sx={{ textAlign: "left" }}
+            >
+              {title}
+            </Typography>
+          )}
           <List className="posts">
             <TransitionGroup>
               {posts.map((post: any) => (

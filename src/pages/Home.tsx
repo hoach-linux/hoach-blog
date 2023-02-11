@@ -106,7 +106,7 @@ function Home() {
         ))}
       <PostList
         posts={sortedAndSearchedPosts}
-        title="All Posts"
+        title=""
       />
       <div ref={lastElement} style={{ height: 0 }} />
       {isLoading || (isLastPageLoading && <Circular />)}

@@ -22,7 +22,7 @@ const Favorites = () => {
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       {posts.length ? (
-        <PostList posts={posts} title="Favorites" />
+        <PostList posts={posts} title="" />
       ) : (
         <Link to="/">
           <Button size="large" href="/" fullWidth>
