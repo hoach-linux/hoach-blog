@@ -6,7 +6,15 @@ import { TransitionGroup } from "react-transition-group";
 import Grow from "@mui/material/Grow";
 import { Box } from "@mui/material";
 
-const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
+const PostList = ({
+  posts,
+  title,
+  remove,
+}: {
+  posts: object[];
+  title: string;
+  remove?: any;
+}) => {
   return (
     <div>
       {posts.length ? (
@@ -25,7 +33,7 @@ const PostList = ({ posts, title }: { posts: object[]; title: string }) => {
             <TransitionGroup>
               {posts.map((post: any) => (
                 <Grow in key={post.id}>
-                  <Post post={post} />
+                  <Post post={post} remove={remove} />
                 </Grow>
               ))}
             </TransitionGroup>

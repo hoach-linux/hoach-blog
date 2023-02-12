@@ -17,7 +17,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 ) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
 const Post = React.forwardRef((props: any, ref: any) => {
   const [snackbar, setSnackbar] = React.useState({
     open: false,
@@ -26,8 +25,12 @@ const Post = React.forwardRef((props: any, ref: any) => {
   });
   const { vertical, horizontal, open } = snackbar;
   const navigate = useNavigate();
-  const currentLocation = window.location.pathname;
+  const currentLocation: any = window.location.pathname;
   const image: string = `https://directus.hoach.skryonline.com/assets/${props.post.image}`;
+
+  if (!localStorage.getItem("favoritesPosts")) {
+    localStorage.setItem("favoritesPosts", JSON.stringify([]));
+  }
 
   const openSnackbar = () => {
     setSnackbar({ ...snackbar, open: true });
@@ -44,18 +47,28 @@ const Post = React.forwardRef((props: any, ref: any) => {
     setSnackbar({ ...snackbar, open: false });
   };
   function addToFavorites() {
-    if (localStorage.getItem("favoritesPosts")) {
-      const favoritesPosts: any = localStorage.getItem("favoritesPosts");
+    const favoritesPosts: any = localStorage.getItem("favoritesPosts");
+    let favorites = JSON.parse(favoritesPosts);
 
-      localStorage.setItem(
-        "favoritesPosts",
-        JSON.stringify([...JSON.parse(favoritesPosts), props.post])
-      );
+    localStorage.setItem(
+      "favoritesPosts",
+      JSON.stringify([...favorites, props.post])
+    );
 
-      openSnackbar();
-    } else {
-      localStorage.setItem("favoritesPosts", JSON.stringify([props.post]));
-    }
+    openSnackbar();
+  }
+  function removeFromFavorites() {
+    const favoritesPosts: any = localStorage.getItem("favoritesPosts");
+    const filteredPosts = JSON.parse(favoritesPosts).filter(
+      (post: any) => post.id !== props.post.id
+    );
+
+    localStorage.setItem("favoritesPosts", JSON.stringify(filteredPosts));
+
+    props.remove(filteredPosts);
+  }
+  function reloadPage() {
+    window.location.reload();
   }
 
   return (
@@ -97,13 +110,28 @@ const Post = React.forwardRef((props: any, ref: any) => {
             </CardActions>
           </div>
         ) : (
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ mt: 0.5, mb: 2 }}
-          >
-            {props.post.body}
-          </Typography>
+          <div>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ mt: 0.5, mb: 2 }}
+            >
+              {props.post.body}
+            </Typography>
+            {currentLocation === "/favorites" && (
+              <CardActions>
+                <Button
+                  onClick={removeFromFavorites}
+                  color="error"
+                  size="large"
+                  fullWidth
+                  variant="text"
+                >
+                  Delete
+                </Button>
+              </CardActions>
+            )}
+          </div>
         )}
       </CardContent>
       <Snackbar

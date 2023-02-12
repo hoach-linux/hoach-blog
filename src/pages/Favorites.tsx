@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import PostList from "../components/PostList";
 import { Button } from "@mui/material";
 import { motion } from "framer-motion";
@@ -6,13 +7,17 @@ import { Link } from "react-router-dom";
 
 const Favorites = () => {
   const favoritesPosts: any = localStorage.getItem("favoritesPosts");
-  let posts: any[] = [];
+  const [posts, setPosts] = useState([]);
 
-  if (JSON.parse(favoritesPosts)) {
-    posts = JSON.parse(favoritesPosts);
-  } else {
-    posts = [];
-  }
+  const removeFromFavorites = (newPosts: any) => setPosts(newPosts);
+
+  useEffect(() => {
+    if (JSON.parse(favoritesPosts)) {
+      setPosts(JSON.parse(favoritesPosts));
+    } else {
+      setPosts([]);
+    }
+  }, []);
 
   return (
     <motion.div
@@ -22,7 +27,7 @@ const Favorites = () => {
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       {posts.length ? (
-        <PostList posts={posts} title="" />
+        <PostList posts={posts} title="" remove={removeFromFavorites} />
       ) : (
         <Link to="/">
           <Button size="large" href="/" fullWidth>
