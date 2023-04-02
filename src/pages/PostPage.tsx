@@ -29,7 +29,7 @@ const PostPage = () => {
 
   useEffect(() => {
     fetchPostById();
-    fetchComments();
+    // fetchComments();
   }, []);
   return (
     <motion.div
@@ -52,7 +52,7 @@ const PostPage = () => {
           {errorMessage}
         </Typography>
       )}
-      <Box sx={{ mt: 2 }}>
+      {/* <Box sx={{ mt: 2 }}>
         {errorMessageComments && (
           <Typography
             variant="h3"
@@ -68,7 +68,7 @@ const PostPage = () => {
         ) : (
           <CommentList comments={comments} title="Comments" />
         )}
-      </Box>
+      </Box> */}
     </motion.div>
   );
 };

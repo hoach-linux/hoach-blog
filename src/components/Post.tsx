@@ -111,13 +111,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
           </div>
         ) : (
           <div>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mt: 0.5, mb: 2 }}
-            >
-              {props.post.body}
-            </Typography>
+            <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
             {currentLocation === "/favorites" && (
               <CardActions>
                 <Button

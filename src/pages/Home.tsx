@@ -104,10 +104,19 @@ function Home() {
             {errorMessage}
           </Typography>
         ))}
-      <PostList
-        posts={sortedAndSearchedPosts}
-        title=""
-      />
+      {!isLoading ? (
+        <PostList posts={sortedAndSearchedPosts} title="" />
+      ) : (
+        <Typography
+          variant="h3"
+          component="h3"
+          style={{ marginTop: "50px" }}
+          className="paragraph"
+        >
+          Posts not found
+        </Typography>
+      )}
+
       <div ref={lastElement} style={{ height: 0 }} />
       {isLoading || (isLastPageLoading && <Circular />)}
     </motion.div>

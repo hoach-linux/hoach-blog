@@ -13,7 +13,7 @@ const About = () => {
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <Typography variant="h3" component="h3" className="paragraph">
-        <Link href="http://nguyen-hoach.netlify.app/">Nguyen Tien Hoach</Link>{" "}
+        <Link href="https://hoachnt.com/">Nguyen Tien Hoach</Link>{" "}
         with <FavoriteIcon fontSize="large" sx={{ color: "red" }} />
       </Typography>
     </motion.div>
