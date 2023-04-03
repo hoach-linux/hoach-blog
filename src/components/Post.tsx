@@ -106,23 +106,37 @@ const Post = React.forwardRef((props: any, ref: any) => {
               </Button>
             </CardActions>
           </div>
-        ) : (
+        ) : currentLocation === "/favorites" ? (
           <div>
-            <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
-            {currentLocation === "/favorites" && (
-              <CardActions>
-                <Button
-                  onClick={removeFromFavorites}
-                  color="error"
-                  size="large"
-                  fullWidth
-                  variant="text"
-                >
-                  Delete
-                </Button>
-              </CardActions>
-            )}
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ mt: 0.5, mb: 2 }}
+            >
+              {props.post.description}
+            </Typography>
+            <CardActions>
+              <Button
+                onClick={() => navigate(`/posts/${props.post.id}`)}
+                fullWidth
+                variant="contained"
+                size="large"
+              >
+                Read more
+              </Button>
+              <Button
+                onClick={removeFromFavorites}
+                color="error"
+                size="large"
+                fullWidth
+                variant="text"
+              >
+                Delete
+              </Button>
+            </CardActions>
           </div>
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
         )}
       </CardContent>
       <Snackbar
