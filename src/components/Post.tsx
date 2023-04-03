@@ -83,9 +83,6 @@ const Post = React.forwardRef((props: any, ref: any) => {
         >
           {props.post.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {props.post.id}
-        </Typography>
         {currentLocation === "/" ? (
           <div>
             <Typography

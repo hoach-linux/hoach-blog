@@ -29,11 +29,9 @@ const Favorites = () => {
       {posts.length ? (
         <PostList posts={posts} title="" remove={removeFromFavorites} />
       ) : (
-        <Link to="/">
-          <Button size="large" href="/" fullWidth>
-            Add favorites
-          </Button>
-        </Link>
+        <Button size="large" component={Link} to="/">
+          Add favorites
+        </Button>
       )}
     </motion.div>
   );

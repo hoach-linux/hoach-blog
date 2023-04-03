@@ -104,9 +104,10 @@ function Home() {
             {errorMessage}
           </Typography>
         ))}
-      {!isLoading ? (
+      {!isLoading && (
         <PostList posts={sortedAndSearchedPosts} title="" />
-      ) : (
+      )}
+      {!isLoading && sortedAndSearchedPosts.length < 1 && (
         <Typography
           variant="h3"
           component="h3"
@@ -116,7 +117,6 @@ function Home() {
           Posts not found
         </Typography>
       )}
-
       <div ref={lastElement} style={{ height: 0 }} />
       {isLoading || (isLastPageLoading && <Circular />)}
     </motion.div>
