@@ -5,15 +5,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import InfoIcon from "@mui/icons-material/Info";
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function LabelBottomNavigation() {
-  const currentLocation = window.location.pathname;
+  const currentLocation = useLocation().pathname;
   const [value, setValue] = React.useState(currentLocation);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
-  };
+  React.useEffect(() => {
+    setValue(currentLocation)
+  }, [currentLocation])
 
   return (
     <Paper
@@ -29,7 +29,6 @@ export default function LabelBottomNavigation() {
       <BottomNavigation
         sx={{ width: "fullWidth", background: "#000" }}
         value={value}
-        onChange={handleChange}
       >
         <BottomNavigationAction
           component={Link}
