@@ -104,10 +104,8 @@ function Home() {
             {errorMessage}
           </Typography>
         ))}
-      {!isLoading && (
-        <PostList posts={sortedAndSearchedPosts} title="" />
-      )}
-      {!isLoading && sortedAndSearchedPosts.length < 1 && (
+      {!isLoading && <PostList posts={sortedAndSearchedPosts} title="" />}
+      {!isLoading && !sortedAndSearchedPosts.length && searchQuery && (
         <Typography
           variant="h3"
           component="h3"
