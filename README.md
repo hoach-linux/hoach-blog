@@ -1,2 +1,1 @@
-# react-app
-My first react app
+# Blog about built by react
