@@ -71,6 +71,7 @@ function Home() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
       exit={{ opacity: 0 }}
+      id="home"
     >
       <TextField
         className="input"
