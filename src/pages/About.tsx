@@ -11,6 +11,7 @@ const About = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
+      id="about"
     >
       <Typography variant="h3" component="h3" className="paragraph">
         <Link href="https://hoachnt.com/">Nguyen Tien Hoach</Link>{" "}

@@ -25,6 +25,7 @@ const Favorites = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
+      id="favorites"
     >
       {posts.length ? (
         <PostList posts={posts} title="" remove={removeFromFavorites} />
