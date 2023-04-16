@@ -7,6 +7,10 @@
   padding: 1rem;
   min-height: 100vh;
 }
+#favorites {
+  display: flex;
+  justify-content: center;
+}
 
 @media screen and (max-width: 975px) {
   #root {
