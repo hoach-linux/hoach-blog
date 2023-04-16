@@ -18,18 +18,9 @@ const PostPage = () => {
 
     setPost(response.data);
   });
-  const [comments, setComments] = useState([]);
-  const [fetchComments, isLoadingComments, errorMessageComments] = useFetching(
-    async () => {
-      const response = await PostService.getCommentsByPostId(params.id);
-
-      setComments(response);
-    }
-  );
 
   useEffect(() => {
     fetchPostById();
-    // fetchComments();
   }, []);
   return (
     <motion.div
@@ -52,23 +43,6 @@ const PostPage = () => {
           {errorMessage}
         </Typography>
       )}
-      {/* <Box sx={{ mt: 2 }}>
-        {errorMessageComments && (
-          <Typography
-            variant="h3"
-            component="h3"
-            className="paragraph"
-            style={{ marginTop: "50px" }}
-          >
-            {errorMessageComments}
-          </Typography>
-        )}
-        {isLoadingComments || errorMessageComments ? (
-          <Circular />
-        ) : (
-          <CommentList comments={comments} title="Comments" />
-        )}
-      </Box> */}
     </motion.div>
   );
 };
