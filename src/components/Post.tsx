@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { CardActions, Skeleton } from "@mui/material";
+import { useFetching } from "../hooks/useFetching";
+import PostService from "../API/PostService";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -26,7 +28,16 @@ const Post = React.forwardRef((props: any, ref: any) => {
   const { vertical, horizontal, open } = snackbar;
   const navigate = useNavigate();
   const currentLocation: any = window.location.pathname;
-  const image: string = `https://directus.hoach.skryonline.com/assets/${props.post.image}`;
+  const [image, setImage] = React.useState("");
+  const [getImage, isLoading, error] = useFetching(async () => {
+    const image = await PostService.getImage(props.post.image);
+
+    setImage(image);
+  });
+
+  React.useEffect(() => {
+    getImage();
+  }, []);
 
   if (!localStorage.getItem("favoritesPosts")) {
     localStorage.setItem("favoritesPosts", JSON.stringify([]));
@@ -67,13 +78,10 @@ const Post = React.forwardRef((props: any, ref: any) => {
 
     props.remove(filteredPosts);
   }
-  function reloadPage() {
-    window.location.reload();
-  }
 
   return (
     <Card ref={ref} sx={{ maxWidth: 945 }} className="post">
-      {image ? (
+      {!isLoading && !error ? (
         <CardMedia component="img" alt="img" image={image} />
       ) : (
         <Skeleton animation="wave" variant="rectangular" width="100%" />

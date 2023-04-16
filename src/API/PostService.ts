@@ -43,10 +43,10 @@ export default class PostService {
 
     return [pages.data.data, totalPages] as const;
   }
-  static async getCommentsByPostId(id: string | undefined) {
-    const url: string = "https://jsonplaceholder.typicode.com/posts";
+  static async getImage(id: string | undefined) {
+    const url: string = "https://directus.hoach.skryonline.com/assets";
 
-    const response = await axios.get(`${url}/${id}/comments`);
+    const response = await axios.get(`${url}/${id}`);
 
     return response.data;
   }
