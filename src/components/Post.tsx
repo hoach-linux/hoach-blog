@@ -84,7 +84,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
       {!isLoading && !error ? (
         <CardMedia component="img" alt="img" image={image} />
       ) : (
-        <Skeleton animation="wave" variant="rectangular" width="100%" />
+        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" width="100%" />
       )}
       <CardContent>
         <Typography
