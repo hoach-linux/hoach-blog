@@ -109,17 +109,8 @@ function Home() {
             {errorMessage}
           </Typography>
         ))}
-      {!isLoading && !errorMessage && sortedAndSearchedPosts.length > 0 ? (
+      {!isLoading && !errorMessage && sortedAndSearchedPosts.length > 0 && (
         <PostList posts={sortedAndSearchedPosts} title="" />
-      ) : (
-        <Typography
-          variant="h3"
-          component="h3"
-          style={{ marginTop: "50px" }}
-          className="paragraph"
-        >
-          Posts not found
-        </Typography>
       )}
       {!isLoading && !sortedAndSearchedPosts.length && searchQuery && (
         <Typography
