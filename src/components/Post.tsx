@@ -20,6 +20,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Post = React.forwardRef((props: any, ref: any) => {
+  const url = "https://directus.hoach.skryonline.com/assets/";
   const [snackbar, setSnackbar] = React.useState({
     open: false,
     vertical: "top" as "top",
@@ -32,7 +33,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
   const [getImage, isLoading, error] = useFetching(async () => {
     const image = await PostService.getImage(props.post.image);
 
-    setImage(image);
+    setImage(`${url}/${props.post.image}`);
   });
 
   React.useEffect(() => {
@@ -84,7 +85,12 @@ const Post = React.forwardRef((props: any, ref: any) => {
       {!isLoading && !error ? (
         <CardMedia component="img" alt="img" image={image} />
       ) : (
-        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" width="100%" />
+        <Skeleton
+          sx={{ height: 190 }}
+          animation="wave"
+          variant="rectangular"
+          width="100%"
+        />
       )}
       <CardContent>
         <Typography

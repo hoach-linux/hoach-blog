@@ -73,31 +73,27 @@ function Home() {
       exit={{ opacity: 0 }}
       id="home"
     >
-      {sortedAndSearchedPosts.length > 0 && !errorMessage && (
-        <>
-          <TextField
-            className="input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            fullWidth
-            id="outlined-basic"
-            label="Search"
-            variant="outlined"
-            inputProps={{ minLength: 1 }}
-          />
-          <Divider
-            style={{ marginBottom: "10px", marginTop: "10px" }}
-            component="div"
-            role="presentation"
-          />
-          <PostSelect
-            options={options}
-            value={selectedSort}
-            defaultValue="Sort"
-            change={sortPosts}
-          />
-        </>
-      )}
+      <TextField
+        className="input"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        fullWidth
+        id="outlined-basic"
+        label="Search"
+        variant="outlined"
+        inputProps={{ minLength: 1 }}
+      />
+      <Divider
+        style={{ marginBottom: "10px", marginTop: "10px" }}
+        component="div"
+        role="presentation"
+      />
+      <PostSelect
+        options={options}
+        value={selectedSort}
+        defaultValue="Sort"
+        change={sortPosts}
+      />
       {errorMessage ||
         (lastPageErrorMessage && (
           <Typography
@@ -112,16 +108,6 @@ function Home() {
       {!isLoading && !errorMessage && sortedAndSearchedPosts.length > 0 && (
         <PostList posts={sortedAndSearchedPosts} title="" />
       )}
-      {!isLoading && sortedAndSearchedPosts.length < 1 && !searchQuery && (
-        <Typography
-          variant="h3"
-          component="h3"
-          style={{ marginTop: "50px" }}
-          className="paragraph"
-        >
-          Posts not found
-        </Typography>
-      )}
       {!isLoading && !sortedAndSearchedPosts.length && searchQuery && (
         <Typography
           variant="h3"
@@ -132,16 +118,20 @@ function Home() {
           Posts not found
         </Typography>
       )}
-      <div ref={lastElement} style={{ height: 0 }} />
       {isLoading ||
-        (isLastPageLoading && (
+        (isLastPageLoading && sortedAndSearchedPosts.length < 1 && (
           <Backdrop
-            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            sx={{
+              color: "#fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+              background: "#000",
+            }}
             open={true}
           >
             <CircularProgress color="inherit" />
           </Backdrop>
         ))}
+      <div ref={lastElement} style={{ height: 0 }} />
     </motion.div>
   );
 }
