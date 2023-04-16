@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Divider from "@mui/material/Divider";
 import PostList from "../components/PostList";
 import PostSelect from "../components/PostSelect";
-import { TextField } from "@mui/material";
+import { Backdrop, CircularProgress, TextField } from "@mui/material";
 import PostService from "../API/PostService";
 import Circular from "../components/Circular";
 import Typography from "@mui/material/Typography";
@@ -73,27 +73,31 @@ function Home() {
       exit={{ opacity: 0 }}
       id="home"
     >
-      <TextField
-        className="input"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        fullWidth
-        id="outlined-basic"
-        label="Search"
-        variant="outlined"
-        inputProps={{ minLength: 1 }}
-      />
-      <Divider
-        style={{ marginBottom: "10px", marginTop: "10px" }}
-        component="div"
-        role="presentation"
-      />
-      <PostSelect
-        options={options}
-        value={selectedSort}
-        defaultValue="Sort"
-        change={sortPosts}
-      />
+      {sortedAndSearchedPosts.length > 0 && !errorMessage && (
+        <>
+          <TextField
+            className="input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            fullWidth
+            id="outlined-basic"
+            label="Search"
+            variant="outlined"
+            inputProps={{ minLength: 1 }}
+          />
+          <Divider
+            style={{ marginBottom: "10px", marginTop: "10px" }}
+            component="div"
+            role="presentation"
+          />
+          <PostSelect
+            options={options}
+            value={selectedSort}
+            defaultValue="Sort"
+            change={sortPosts}
+          />
+        </>
+      )}
       {errorMessage ||
         (lastPageErrorMessage && (
           <Typography
@@ -105,7 +109,18 @@ function Home() {
             {errorMessage}
           </Typography>
         ))}
-      {!isLoading && <PostList posts={sortedAndSearchedPosts} title="" />}
+      {!isLoading && !errorMessage && sortedAndSearchedPosts.length > 0 ? (
+        <PostList posts={sortedAndSearchedPosts} title="" />
+      ) : (
+        <Typography
+          variant="h3"
+          component="h3"
+          style={{ marginTop: "50px" }}
+          className="paragraph"
+        >
+          Posts not found
+        </Typography>
+      )}
       {!isLoading && !sortedAndSearchedPosts.length && searchQuery && (
         <Typography
           variant="h3"
@@ -117,7 +132,15 @@ function Home() {
         </Typography>
       )}
       <div ref={lastElement} style={{ height: 0 }} />
-      {isLoading || (isLastPageLoading && <Circular />)}
+      {isLoading ||
+        (isLastPageLoading && (
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={true}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        ))}
     </motion.div>
   );
 }
