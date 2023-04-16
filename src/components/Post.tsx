@@ -9,7 +9,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { CardActions } from "@mui/material";
+import { CardActions, Skeleton } from "@mui/material";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -73,7 +73,11 @@ const Post = React.forwardRef((props: any, ref: any) => {
 
   return (
     <Card ref={ref} sx={{ maxWidth: 945 }} className="post">
-      <CardMedia component="img" alt="img" image={image} />
+      {image ? (
+        <CardMedia component="img" alt="img" image={image} />
+      ) : (
+        <Skeleton animation="wave" variant="rectangular" width="100%" />
+      )}
       <CardContent>
         <Typography
           gutterBottom
