@@ -4,8 +4,6 @@ import { useFetching } from "../hooks/useFetching";
 import PostService from "../API/PostService";
 import { useState, useEffect } from "react";
 import Post from "../components/Post";
-import { Box } from "@mui/system";
-import CommentList from "../components/CommentList";
 import Circular from "../components/Circular";
 import { Typography } from "@mui/material";
 import { motion } from "framer-motion";

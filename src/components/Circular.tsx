@@ -4,7 +4,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const Circular = () => {
   return (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "10px",
+      }}
+    >
       <CircularProgress />
     </Box>
   );

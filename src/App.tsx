@@ -37,7 +37,7 @@ const theme = createTheme({
 
 function App() {
   return (
-    <div className="App">
+    <div id="App">
       <ThemeProvider theme={theme}>
         <Navbar />
         <Toolbar />

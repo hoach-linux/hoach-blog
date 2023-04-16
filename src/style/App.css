@@ -2,16 +2,19 @@
   -webkit-tap-highlight-color: transparent;
 }
 #root {
-  max-width: 1280px;
+  width: clamp(320px, 100%, 970px);
   margin: 0 auto;
   padding: 1rem;
   min-height: 100vh;
 }
-@media only screen and (max-width: 975px) {
+
+@media screen and (max-width: 975px) {
   #root {
     padding: 0;
   }
-  #home, #favorites, #about {
+  #home,
+  #favorites,
+  #about {
     padding: 0.7rem;
   }
   .post {
