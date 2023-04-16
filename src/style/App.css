@@ -11,6 +11,12 @@
   display: flex;
   justify-content: center;
 }
+pre {
+  background: #272727;
+  overflow-x: auto;
+  padding: 10px;
+  border-radius: 10px;
+}
 
 @media screen and (max-width: 975px) {
   #root {
