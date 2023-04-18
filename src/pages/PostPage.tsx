@@ -7,6 +7,7 @@ import Post from "../components/Post";
 import Circular from "../components/Circular";
 import { Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import "../style/PostPage.css";
 
 const PostPage = () => {
   const params = useParams();

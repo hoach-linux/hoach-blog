@@ -97,17 +97,16 @@ function Home() {
             defaultValue="Sort"
             change={sortPosts}
           />
-          {errorMessage ||
-            (lastPageErrorMessage && (
-              <Typography
-                variant="h3"
-                component="h3"
-                className="paragraph"
-                style={{ marginTop: "50px" }}
-              >
-                {errorMessage}
-              </Typography>
-            ))}
+          {errorMessage && (
+            <Typography
+              variant="h3"
+              component="h3"
+              className="paragraph"
+              style={{ marginTop: "50px" }}
+            >
+              {errorMessage}
+            </Typography>
+          )}
           {!isLoading && !errorMessage && sortedAndSearchedPosts.length > 0 && (
             <PostList posts={sortedAndSearchedPosts} title="" />
           )}

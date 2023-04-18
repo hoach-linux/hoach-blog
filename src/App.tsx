@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import Toolbar from "@mui/material/Toolbar";
 import { Outlet, useLocation } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useEffect } from "react";
 
 const theme = createTheme({
   palette: {
