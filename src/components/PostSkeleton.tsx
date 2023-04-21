@@ -7,7 +7,7 @@ function PostSkeleton() {
     <Box sx={{ marginTop: "40px" }}>
       <Skeleton variant="rectangular" height={250} />
       <Skeleton height={50} />
-      <Skeleton height={80} />
+      <Skeleton height={100} />
     </Box>
   );
 }
