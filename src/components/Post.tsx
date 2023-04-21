@@ -86,7 +86,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
         <CardMedia component="img" alt="img" image={image} />
       ) : (
         <Skeleton
-          sx={{ height: 190 }}
+          sx={{ height: 250 }}
           animation="wave"
           variant="rectangular"
           width="100%"

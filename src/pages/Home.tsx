@@ -130,7 +130,14 @@ function Home() {
         </>
       )}
       <div ref={lastElement} style={{ height: 0 }} />
-      {isLoading && <PostSkeleton />}
+      {isLoading && (
+        <>
+          <PostSkeleton />
+          <PostSkeleton />
+          <PostSkeleton />
+          <PostSkeleton />
+        </>
+      )}
     </motion.div>
   );
 }
