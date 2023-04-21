@@ -95,68 +95,62 @@ const Post = React.forwardRef((props: any, ref: any) => {
       <CardContent>
         <Typography
           gutterBottom
-          variant="h5"
+          variant="h4"
           component="div"
           sx={{ fontSize: "xl", mt: 2 }}
         >
           {props.post.title}
         </Typography>
-        {currentLocation === "/" ? (
-          <div>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mt: 0.5, mb: 2 }}
-            >
-              {props.post.description}
-            </Typography>
-            <CardActions>
-              <Button
-                onClick={() => navigate(`/posts/${props.post.id}`)}
-                fullWidth
-                variant="contained"
-                size="large"
-              >
-                Read more
-              </Button>
-              <Button onClick={addToFavorites} size="large">
-                <FavoriteBorder />
-              </Button>
-            </CardActions>
-          </div>
-        ) : currentLocation === "/favorites" ? (
-          <div>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mt: 0.5, mb: 2 }}
-            >
-              {props.post.description}
-            </Typography>
-            <CardActions>
-              <Button
-                onClick={() => navigate(`/posts/${props.post.id}`)}
-                fullWidth
-                variant="contained"
-                size="large"
-              >
-                Read more
-              </Button>
-              <Button
-                onClick={removeFromFavorites}
-                color="error"
-                size="large"
-                fullWidth
-                variant="text"
-              >
-                Delete
-              </Button>
-            </CardActions>
-          </div>
-        ) : (
-          <div dangerouslySetInnerHTML={{ __html: props.post.body }}></div>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ mt: 0.5, mb: 2 }}
+        >
+          {props.post.description}
+        </Typography>
+        {currentLocation !== "/" && currentLocation !== "/favorites" && (
+          <Typography
+            dangerouslySetInnerHTML={{ __html: props.post.body }}
+          ></Typography>
         )}
       </CardContent>
+      {currentLocation === "/" && (
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            onClick={addToFavorites}
+            size="large"
+            variant="outlined"
+          >
+            <FavoriteBorder />
+          </Button>
+          <Button
+            onClick={() => navigate(`/posts/${props.post.id}`)}
+            size="large"
+            variant="contained"
+          >
+            Read more
+          </Button>
+        </CardActions>
+      )}
+      {currentLocation === "/favorites" && (
+        <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            onClick={removeFromFavorites}
+            size="large"
+            color="warning"
+            variant="outlined"
+          >
+            Delete
+          </Button>
+          <Button
+            onClick={() => navigate(`/posts/${props.post.id}`)}
+            size="large"
+            variant="contained"
+          >
+            Read more
+          </Button>
+        </CardActions>
+      )}
       <Snackbar
         open={snackbar.open}
         anchorOrigin={{ vertical, horizontal }}

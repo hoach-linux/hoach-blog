@@ -14,6 +14,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "25px",
+          paddingRight: "20px",
+          paddingLeft: "20px",
+          textTransform: "capitalize"
         },
       },
     },
