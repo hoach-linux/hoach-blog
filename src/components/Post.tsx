@@ -101,26 +101,24 @@ const Post = React.forwardRef((props: any, ref: any) => {
         >
           {props.post.title}
         </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mt: 0.5, mb: 2 }}
-        >
-          {props.post.description}
-        </Typography>
-        {currentLocation !== "/" && currentLocation !== "/favorites" && (
+
+        {currentLocation !== "/" && currentLocation !== "/favorites" ? (
           <Typography
             dangerouslySetInnerHTML={{ __html: props.post.body }}
           ></Typography>
+        ) : (
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mt: 0.5, mb: 2 }}
+          >
+            {props.post.description}
+          </Typography>
         )}
       </CardContent>
       {currentLocation === "/" && (
         <CardActions sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            onClick={addToFavorites}
-            size="large"
-            variant="outlined"
-          >
+          <Button onClick={addToFavorites} size="large" variant="outlined">
             <FavoriteBorder />
           </Button>
           <Button
