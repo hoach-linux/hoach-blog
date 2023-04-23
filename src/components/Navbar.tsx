@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Slide from "@mui/material/Slide";
 import { alpha, styled, useScrollTrigger } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -39,8 +39,9 @@ function HideOnScroll(props: Props) {
 
 const Navbar = () => {
   const navItems = ["Favorites", "About"];
-  const searchQuery = useStore((state: any) => state.searchQuery)
-  const setSearchQuery = useStore((state: any) => state.setSearchQuery)
+  const searchQuery = useStore((state: any) => state.searchQuery);
+  const setSearchQuery = useStore((state: any) => state.setSearchQuery);
+  const location = useLocation().pathname;
 
   return (
     <React.Fragment>
@@ -63,17 +64,19 @@ const Navbar = () => {
               >
                 NB
               </Typography>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </Search>
+              {location === "/" && (
+                <Search>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search…"
+                    inputProps={{ "aria-label": "search" }}
+                  />
+                </Search>
+              )}
               <Box sx={{ display: { xs: "none", sm: "flex" } }}>
                 <Button
                   variant="contained"

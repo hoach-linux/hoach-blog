@@ -13,7 +13,7 @@ const Favorites = () => {
 
   useEffect(() => {
     if (JSON.parse(favoritesPosts)) {
-      setPosts(JSON.parse(favoritesPosts));
+      setPosts(JSON.parse(favoritesPosts).reverse());
     } else {
       setPosts([]);
     }
