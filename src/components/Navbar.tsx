@@ -7,7 +7,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Slide from "@mui/material/Slide";
-import { useScrollTrigger } from "@mui/material";
+import { alpha, styled, useScrollTrigger } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { Search, SearchIconWrapper, StyledInputBase } from "./Search";
+import useStore from "../store/useStore";
 
 interface Props {
   /**
@@ -36,6 +39,8 @@ function HideOnScroll(props: Props) {
 
 const Navbar = () => {
   const navItems = ["Favorites", "About"];
+  const searchQuery = useStore((state: any) => state.searchQuery)
+  const setSearchQuery = useStore((state: any) => state.setSearchQuery)
 
   return (
     <React.Fragment>
@@ -58,28 +63,37 @@ const Navbar = () => {
               >
                 NB
               </Typography>
-              <Box sx={{ display: "flex" }}>
-                <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+              <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component={Link}
+                  to={"/"}
+                  sx={{ mr: { sm: 2 } }}
+                >
+                  Home
+                </Button>
+                {navItems.map((item) => (
                   <Button
-                    variant="contained"
-                    color="primary"
                     component={Link}
-                    to={"/"}
-                    sx={{ mr: { sm: 2 } }}
+                    to={item.toLocaleLowerCase()}
+                    key={item}
+                    sx={{ color: "#fff", "&:hover": { color: "#fff" } }}
                   >
-                    Home
+                    {item}
                   </Button>
-                  {navItems.map((item) => (
-                    <Button
-                      component={Link}
-                      to={item.toLocaleLowerCase()}
-                      key={item}
-                      sx={{ color: "#fff", "&:hover": { color: "#fff" } }}
-                    >
-                      {item}
-                    </Button>
-                  ))}
-                </Box>
+                ))}
               </Box>
             </Toolbar>
           </AppBar>

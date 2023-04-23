@@ -10,11 +10,12 @@ import { useFetching } from "../hooks/useFetching";
 import { motion } from "framer-motion";
 import Circular from "../components/Circular";
 import PostSkeleton from "../components/PostSkeleton";
+import useStore from "../store/useStore";
 
 function Home() {
   const [posts, setPosts]: [posts: any, setPosts: any] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchQuery = useStore((state: any) => state.searchQuery);
   let [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   let [page, setPage] = useState(1);
@@ -76,7 +77,7 @@ function Home() {
     >
       {!isLastPageLoading ? (
         <>
-          <TextField
+          {/* <TextField
             className="input"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -90,7 +91,7 @@ function Home() {
             style={{ marginBottom: "10px", marginTop: "10px" }}
             component="div"
             role="presentation"
-          />
+          /> */}
           <PostSelect
             options={options}
             value={selectedSort}
