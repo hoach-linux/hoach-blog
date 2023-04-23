@@ -5,12 +5,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Slide from "@mui/material/Slide";
-import { alpha, styled, useScrollTrigger } from "@mui/material";
+import { IconButton, useScrollTrigger } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search, SearchIconWrapper, StyledInputBase } from "./Search";
 import useStore from "../store/useStore";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 interface Props {
   /**
@@ -42,6 +43,7 @@ const Navbar = () => {
   const searchQuery = useStore((state: any) => state.searchQuery);
   const setSearchQuery = useStore((state: any) => state.setSearchQuery);
   const location = useLocation().pathname;
+  const navigate = useNavigate();
 
   return (
     <React.Fragment>
@@ -52,6 +54,19 @@ const Navbar = () => {
             <Toolbar
               style={{ display: "flex", justifyContent: "space-between" }}
             >
+              {location.includes("post") && (
+                <IconButton
+                  onClick={() => navigate(-1)}
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  sx={{ mr: 2 }}
+                >
+                  <ArrowBackIosNewIcon />
+                </IconButton>
+              )}
+
               <Typography
                 variant="h6"
                 component={Link}
