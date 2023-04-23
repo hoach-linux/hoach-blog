@@ -77,21 +77,6 @@ function Home() {
     >
       {!isLastPageLoading ? (
         <>
-          {/* <TextField
-            className="input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            fullWidth
-            id="outlined-basic"
-            label="Search"
-            variant="outlined"
-            inputProps={{ minLength: 1 }}
-          />
-          <Divider
-            style={{ marginBottom: "10px", marginTop: "10px" }}
-            component="div"
-            role="presentation"
-          /> */}
           <PostSelect
             options={options}
             value={selectedSort}
