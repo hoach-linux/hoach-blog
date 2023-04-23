@@ -27,10 +27,4 @@ pre {
   #about {
     padding: 0.7rem;
   }
-  .post {
-    margin-top: 0;
-  }
-  .post img {
-    border-radius: 0 !important;
-  }
 }

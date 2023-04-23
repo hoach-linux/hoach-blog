@@ -4,14 +4,14 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import "../assets/style/post.css";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { CardActions, Skeleton } from "@mui/material";
-import { useFetching } from "../hooks/useFetching";
-import PostService from "../API/PostService";
+import { useFetching } from "../../hooks/useFetching";
+import PostService from "../../API/PostService";
+import "./Post.css";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,

@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom";
 import { useFetching } from "../hooks/useFetching";
 import PostService from "../API/PostService";
 import { useState, useEffect } from "react";
-import Post from "../components/Post";
+import Post from "../components/Post/Post";
 import Circular from "../components/Circular";
 import { Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import "../style/PostPage.css";
 
 const PostPage = () => {
   const params = useParams();
