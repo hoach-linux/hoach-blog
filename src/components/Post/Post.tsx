@@ -1,17 +1,11 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { CardActions, Skeleton } from "@mui/material";
 import { useFetching } from "../../hooks/useFetching";
 import PostService from "../../API/PostService";
 import "./Post.css";
+import PostMain from "./PostMain";
+import PostFavorites from "./PostFavorites";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props,
@@ -27,7 +21,6 @@ const Post = React.forwardRef((props: any, ref: any) => {
         horizontal: "center" as "center",
     });
     const { vertical, horizontal, open } = snackbar;
-    const navigate = useNavigate();
     const currentLocation: any = window.location.pathname;
     const [image, setImage] = React.useState("");
     const [getImage, isLoading, error] = useFetching(async () => {
@@ -39,10 +32,6 @@ const Post = React.forwardRef((props: any, ref: any) => {
     React.useEffect(() => {
         getImage();
     }, []);
-
-    if (!localStorage.getItem("favoritesPosts")) {
-        localStorage.setItem("favoritesPosts", JSON.stringify([]));
-    }
 
     const openSnackbar = () => {
         setSnackbar({ ...snackbar, open: true });
@@ -81,74 +70,26 @@ const Post = React.forwardRef((props: any, ref: any) => {
     }
 
     return (
-        <Card ref={ref} sx={{ maxWidth: 945 }} className="post">
-            {!isLoading && !error ? (
-                <CardMedia component="img" alt="img" image={image} />
-            ) : (
-                <Skeleton
-                    sx={{ height: 250 }}
-                    animation="wave"
-                    variant="rectangular"
-                    width="100%"
+        <>
+            {currentLocation === "/" && (
+                <PostMain
+                    image={image}
+                    addToFavorites={addToFavorites}
+                    isLoading={isLoading}
+                    error={error}
+                    post={props.post}
+                    ref={ref}
                 />
             )}
-            <CardContent>
-                <Typography
-                    gutterBottom
-                    variant="h4"
-                    component="div"
-                    sx={{ fontSize: "xl", mt: 2 }}
-                >
-                    {props.post.title}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mt: 0.5, mb: 2 }}
-                >
-                    {props.post.description}
-                </Typography>
-            </CardContent>
-            {currentLocation === "/" && (
-                <CardActions
-                    sx={{ display: "flex", justifyContent: "flex-end" }}
-                >
-                    <Button
-                        onClick={addToFavorites}
-                        size="large"
-                        variant="outlined"
-                    >
-                        <FavoriteBorder />
-                    </Button>
-                    <Button
-                        onClick={() => navigate(`/posts/${props.post.id}`)}
-                        size="large"
-                        variant="contained"
-                    >
-                        Read more
-                    </Button>
-                </CardActions>
-            )}
             {currentLocation === "/favorites" && (
-                <CardActions
-                    sx={{ display: "flex", justifyContent: "flex-end" }}
-                >
-                    <Button
-                        onClick={removeFromFavorites}
-                        size="large"
-                        color="warning"
-                        variant="outlined"
-                    >
-                        Delete
-                    </Button>
-                    <Button
-                        onClick={() => navigate(`/posts/${props.post.id}`)}
-                        size="large"
-                        variant="contained"
-                    >
-                        Read more
-                    </Button>
-                </CardActions>
+                <PostFavorites
+                    image={image}
+                    removeFromFavorites={removeFromFavorites}
+                    isLoading={isLoading}
+                    error={error}
+                    post={props.post}
+                    ref={ref}
+                />
             )}
             <Snackbar
                 open={snackbar.open}
@@ -164,7 +105,7 @@ const Post = React.forwardRef((props: any, ref: any) => {
                     {props.post.title} was added to favorites
                 </Alert>
             </Snackbar>
-        </Card>
+        </>
     );
 });
 
