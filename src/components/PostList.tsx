@@ -1,4 +1,3 @@
-import * as React from "react";
 import Post from "./Post/Post";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
