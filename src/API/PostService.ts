@@ -3,7 +3,7 @@ import { getTotalPage } from "../utils/pages";
 
 export default class PostService {
   static async getAll(limit: number, page: number) {
-    const url: string = "https://directus.hoach.skryonline.com/items/posts";
+    const url: string = "https://directus.hoachnt.com/items/posts";
 
     const response = await axios.get(url, {
       params: {
@@ -15,14 +15,14 @@ export default class PostService {
     return response.data;
   }
   static async getById(id: string | undefined) {
-    const url: string = "https://directus.hoach.skryonline.com/items/posts";
+    const url: string = "https://directus.hoachnt.com/items/posts";
 
     const response = await axios.get(`${url}/${id}`);
 
     return response.data;
   }
   static async getLastPage(limit: number) {
-    const url: string = "https://directus.hoach.skryonline.com/items/posts";
+    const url: string = "https://directus.hoachnt.com/items/posts";
 
     const response = await axios.get(url, {
       params: {
@@ -44,7 +44,7 @@ export default class PostService {
     return [pages.data.data, totalPages] as const;
   }
   static async getImage(id: string | undefined) {
-    const url: string = "https://directus.hoach.skryonline.com/assets";
+    const url: string = "https://directus.hoachnt.com/assets";
 
     const response = await axios.get(`${url}/${id}`);
 

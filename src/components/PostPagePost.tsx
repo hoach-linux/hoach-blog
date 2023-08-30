@@ -10,7 +10,7 @@ import { useFetching } from "../hooks/useFetching";
 import PostService from "../API/PostService";
 
 function PostPagePost(props: any) {
-    const url = "https://directus.hoach.skryonline.com/assets/";
+    const url = "https://directus.hoachnt.com/assets/";
     const [image, setImage] = useState("");
     const [getImage, isLoading, error] = useFetching(async () => {
         const image = await PostService.getImage(props.post.image);

@@ -14,7 +14,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const Post = React.forwardRef((props: any, ref: any) => {
-    const url = "https://directus.hoach.skryonline.com/assets/";
+    const url = "https://directus.hoachnt.com/assets/";
     const [snackbar, setSnackbar] = React.useState({
         open: false,
         vertical: "top" as "top",
